@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 17:01:54 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 17:02:33 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/05 18:07:07 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/05 18:15:06 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#pragma once
+
 #include <string>
-#include <cctype>
+#include <iostream>
+#include "Contact.hpp"
 
-int main(int ac, char **av)
+class PhoneBook
 {
-	int i;
+	std::string contact;
+	private:
+		Contact contacts[8];
+		int	contact_limit;
+	public:
+		void	getdata();
+		void	putdata();
+};
 
-	if (ac < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	else
-	{
-		i = 1;
-		while (av[i])
-		{
-			std::string str(av[i]);
-			std::transform(
-				str.begin(),
-				str.end(),
-				str.begin(),
-				[](unsigned char c) { return std::toupper(c); }
-			);
-			std::cout << str;
-			i++;
-		}
-	}
-	return 0;
-}
+

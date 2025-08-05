@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= megaphone
+NAME			:= phonebook
 CXX				:= g++
 
 # Compiler flags
@@ -50,7 +50,7 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	megaphone.cpp
+	PhoneBook.cpp
 
 # Combine all source files
 SRCS := \
@@ -106,7 +106,7 @@ $(NAME): $(OBJS)
 	@echo ">$(BOLD)$(GREEN) $(NAME) successfully compiled!$(RESET)"
 
 # Individual object file compilation with progress tracking
-$(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR) $(DEP_DIR)
+$(OBJ_DIR)/%.o: %.cpp include/*.hpp | $(OBJ_DIR) $(DEP_DIR)
 	@if [ -f $(PROGRESS_FILE) ]; then \
 		CURRENT=$$(cat $(PROGRESS_FILE)); \
 		NEXT=$$((CURRENT + 1)); \

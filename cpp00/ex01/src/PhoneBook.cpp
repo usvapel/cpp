@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 17:01:54 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 17:02:33 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/05 18:15:09 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/05 18:15:26 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include <cctype>
+#include "PhoneBook.hpp"
 
-int main(int ac, char **av)
+void	PhoneBook::getdata()
 {
-	int i;
+	cout<<"          PhoneBook\n";
+	cout<<"Available commands: ADD, SEARCH, EXIT\n";
+	cout<<"Enter command\n";
+	cout<<"> ";
+	cin>>contact;
+}
 
-	if (ac < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	else
-	{
-		i = 1;
-		while (av[i])
-		{
-			std::string str(av[i]);
-			std::transform(
-				str.begin(),
-				str.end(),
-				str.begin(),
-				[](unsigned char c) { return std::toupper(c); }
-			);
-			std::cout << str;
-			i++;
-		}
-	}
-	return 0;
+void	PhoneBook::putdata()
+{
+	cout<<contact<<" ";
+	cout<<endl;
 }
