@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:07:07 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 18:15:06 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/08/05 23:27:49 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,19 @@
 
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include "Contact.hpp"
 
 class PhoneBook
 {
+	std::string command;
 	std::string contact;
 	private:
 		Contact contacts[8];
 		int	contact_limit;
+		int	contact_amount;
 	public:
-		void	getdata();
-		void	putdata();
+		PhoneBook() : contact_limit(0), contact_amount(0) {}
+		void getdata();
+		void putdata();
 };
-
-

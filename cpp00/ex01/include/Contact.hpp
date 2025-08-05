@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 18:33:05 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 18:33:10 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/08/05 22:40:48 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,9 @@
 class Contact
 {
 	public:
-		std::string contact;
+		std::string first_name;
+		std::string last_name;
+		std::string nickname;
+		std::string phone_number;
+		std::string darkest_secret;
 };
