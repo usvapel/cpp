@@ -6,35 +6,23 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 17:01:54 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 17:02:33 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/08/05 22:30:28 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string>
 #include <cctype>
 
 int main(int ac, char **av)
 {
-	int i;
-
 	if (ac < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 	else
 	{
-		i = 1;
-		while (av[i])
-		{
-			std::string str(av[i]);
-			std::transform(
-				str.begin(),
-				str.end(),
-				str.begin(),
-				[](unsigned char c) { return std::toupper(c); }
-			);
-			std::cout << str;
-			i++;
-		}
+		for (int i = 1; i < ac; i++)
+			for (int j = 0; av[i][j]; j++)
+				std::cout << (char)std::toupper(av[i][j]);
+		std::cout << std::endl;
 	}
 	return 0;
 }
