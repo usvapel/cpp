@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <stdexcept>
 
 static std::string get_input(const std::string& prompt)
 {
@@ -76,7 +77,6 @@ static void print_single_contact(Contact contacts[], int index)
 	std::cout << contacts[index - 1].darkest_secret << std::endl;
 }
 
-
 void	PhoneBook::getdata()
 {
 	std::cout << "PhoneBook" << std::endl;
@@ -98,17 +98,37 @@ void	PhoneBook::getdata()
 		}
 		else if (command == "SEARCH")
 		{
+			std::int32_t input{};
 			std::cout << "Available contacts:" << std::endl;
-			print_contacts(contacts, contact_amount);
-			while (true)
+			if (contact_amount == 0)
+				std::cout << "None" << std::endl;
+			else
 			{
-				command = get_input("Expand a contact");
-				if (command.empty()) return;
-				if (std::stoi(command) <= contact_amount && std::stoi(command) > 0)
-					break ;
-				std::cout << "Invalid index! -- available indexes: " << "1 - " << contact_amount << std::endl;
+				print_contacts(contacts, contact_amount);
+				while (true)
+				{
+				input:
+					command = get_input("Expand a contact");
+					if (command.empty()) return;
+					try
+					{
+						input = std::stoi(command);
+					}
+					catch (std::out_of_range const& ex)
+					{
+						std::cout << "invalid argument!" << std::endl;
+						goto input;
+					}
+					if (input <= contact_amount && input > 0)
+						break ;
+					if (contact_amount == 0)
+						std::cout << "Contact list is empty!" << std::endl;
+					else
+						std::cout << "Invalid index! -- available indexes: "
+								<< "1 - " << contact_amount << std::endl;
+				}
+				print_single_contact(contacts, input);
 			}
-			print_single_contact(contacts, std::stoi(command));
 		}
 		else if (command == "EXIT")
 			exit(0);
