@@ -16,6 +16,5 @@ int main()
 {
 	PhoneBook phonebook;
 	phonebook.getdata();
-	//phonebook.putdata();
 	return 0;
 }

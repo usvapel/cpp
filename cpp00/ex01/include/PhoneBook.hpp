@@ -19,14 +19,13 @@
 
 class PhoneBook
 {
-	std::string command;
-	std::string contact;
 	private:
 		Contact contacts[8];
 		int	contact_limit;
 		int	contact_amount;
+		std::string command;
+		int	input;
 	public:
 		PhoneBook() : contact_limit(0), contact_amount(0) {}
 		void getdata();
-		void putdata();
 };

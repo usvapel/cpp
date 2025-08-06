@@ -62,11 +62,26 @@ static void print_contacts(Contact contacts[], int contact_amount)
 	}
 }
 
+static void print_single_contact(Contact contacts[], int index)
+{
+	std::cout << "first name:     ";
+	std::cout << contacts[index - 1].first_name << std::endl;
+	std::cout << "last name:      ";
+	std::cout << contacts[index - 1].last_name << std::endl;
+	std::cout << "nickname:       ";
+	std::cout << contacts[index - 1].nickname << std::endl;
+	std::cout << "phone number:   ";
+	std::cout << contacts[index - 1].phone_number << std::endl;
+	std::cout << "darkest secret: ";
+	std::cout << contacts[index - 1].darkest_secret << std::endl;
+}
+
+
 void	PhoneBook::getdata()
 {
 	std::cout << "PhoneBook" << std::endl;
 	std::cout << "Available commands: ADD, SEARCH, EXIT" << std::endl;
-	while (42)
+	while (true)
 	{
 		command = get_input("Enter command");
 		if (command.empty()) return;
@@ -81,16 +96,21 @@ void	PhoneBook::getdata()
 					contact_amount++;
 			}
 		}
-		if (command == "SEARCH")
+		else if (command == "SEARCH")
 		{
 			std::cout << "Available contacts:" << std::endl;
 			print_contacts(contacts, contact_amount);
+			while (true)
+			{
+				command = get_input("Expand a contact");
+				if (command.empty()) return;
+				if (std::stoi(command) <= contact_amount && std::stoi(command) > 0)
+					break ;
+				std::cout << "Invalid index! -- available indexes: " << "1 - " << contact_amount << std::endl;
+			}
+			print_single_contact(contacts, std::stoi(command));
 		}
+		else if (command == "EXIT")
+			exit(0);
 	}
-}
-
-void	PhoneBook::putdata()
-{
-	std::cout << contact << " ";
-	std::cout << std::endl;
 }
