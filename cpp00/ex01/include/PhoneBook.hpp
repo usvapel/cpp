@@ -25,6 +25,7 @@ class PhoneBook
 		int	contact_amount;
 		std::string command;
 		int	input;
+		int search_contacts();
 	public:
 		PhoneBook() : contact_limit(0), contact_amount(0) {}
 		void getdata();
