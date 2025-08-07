@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 14:07:04 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 14:07:38 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/08/07 22:19:25 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int main()
 {
-	Zombie *zombie = newZombie("sonic");
+	Zombie *zombie = newZombie("Zombie");
 	zombie->announce();
 	delete zombie;
-	randomChump("shadow");
+	randomChump("Chump");
 	return 0;
 }
