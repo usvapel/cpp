@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <stdexcept>
 
 static std::string get_input(const std::string &prompt)
 {
@@ -47,31 +46,21 @@ static void	input_data(Contact &contact)
 	if (contact.darkest_secret.empty()) return ;
 }
 
+static void	print_line(std::string& str)
+{
+	if (str.length() > 10)
+		std::cout << std::setw(10) << str.substr(0, 9) + ".";
+	else
+		std::cout << std::setw(10) << str;
+}
+
 static void	print_contacts(Contact contacts[], int contact_amount)
 {
-	for (int i = 0; i < contact_amount; i++)
-	{
-		std::cout << std::setw(10) << std::left << i + 1;
-
-		std::cout << "|";
-		if (contacts[i].first_name.length() > 10)
-			std::cout << std::setw(10) << contacts[i].first_name.substr(0, 9) + ".";
-		else
-			std::cout << std::setw(10) << contacts[i].first_name;
-
-		std::cout << "|";
-		if (contacts[i].last_name.length() > 10)
-			std::cout << std::setw(10) << contacts[i].last_name.substr(0, 9) + ".";
-		else
-			std::cout << std::setw(10) << contacts[i].last_name;
-
-		std::cout << "|";
-		if (contacts[i].nickname.length() > 10)
-			std::cout << std::setw(10) << contacts[i].nickname.substr(0, 9) + ".";
-		else
-			std::cout << std::setw(10) << contacts[i].nickname;
-
-		std::cout << std::endl;
+	for (int i = 0; i < contact_amount; i++) {
+		std::cout << std::setw(10) << std::left << i + 1 << "|";
+		print_line(contacts[i].first_name); std::cout << "|";
+		print_line(contacts[i].last_name);  std::cout << "|";
+		print_line(contacts[i].nickname);   std::cout << std::endl;
 	}
 }
 
@@ -79,12 +68,16 @@ static void	print_single_contact(Contact contacts[], int index)
 {
 	std::cout << "first name:     ";
 	std::cout << contacts[index - 1].first_name     << std::endl;
+
 	std::cout << "last name:      ";
 	std::cout << contacts[index - 1].last_name      << std::endl;
+
 	std::cout << "nickname:       ";
 	std::cout << contacts[index - 1].nickname       << std::endl;
+
 	std::cout << "phone number:   ";
 	std::cout << contacts[index - 1].phone_number   << std::endl;
+
 	std::cout << "darkest secret: ";
 	std::cout << contacts[index - 1].darkest_secret << std::endl;
 }

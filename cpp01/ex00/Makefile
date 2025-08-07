@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= phonebook
+NAME			:= Zombie
 CXX				:= g++
 
 # Compiler flags
@@ -50,7 +50,9 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	PhoneBook.cpp \
+	Zombie.cpp \
+	newZombie.cpp \
+	randomChump.cpp \
 	main.cpp
 
 # Combine all source files

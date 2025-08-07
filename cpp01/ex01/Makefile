@@ -13,11 +13,11 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= megaphone
+NAME			:= ZombieHorde
 CXX				:= g++
 
 # Compiler flags
-CXXFLAGS		:= -Wall -Wextra -Werror -std=c++11
+CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20
 DEBUG_FLAGS		:= -g3 -fsanitize=address -fsanitize=undefined
 OPTFLAGS		:= -O2
 
@@ -50,7 +50,11 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	megaphone.cpp
+	Zombie.cpp \
+	newZombie.cpp \
+	randomChump.cpp \
+	ZombieHorde.cpp \
+	main.cpp
 
 # Combine all source files
 SRCS := \

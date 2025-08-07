@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   ZombieHorde.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 18:07:07 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 23:27:49 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/07 18:01:15 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/07 18:02:01 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Zombie.hpp"
 
-#include <string>
-#include <iostream>
-#include <iomanip>
-#include "Contact.hpp"
-
-class PhoneBook
+Zombie *zombieHorde(int N, std::string name)
 {
-	private:
-		Contact		contacts[8];
-		int			contact_limit;
-		int			contact_amount;
-		int			input;
-		std::string command;
-		int search_contacts();
-	public:
-		PhoneBook() : contact_limit(0), contact_amount(0) {}
-		void getdata();
-};
+	Zombie *zombie = new Zombie(name)[N];
+	return zombie;
+}
