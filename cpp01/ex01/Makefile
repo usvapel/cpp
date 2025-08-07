@@ -53,7 +53,7 @@ SRCS_MAIN := \
 	Zombie.cpp \
 	newZombie.cpp \
 	randomChump.cpp \
-	ZombieHorde.cpp \
+	zombieHorde.cpp \
 	main.cpp
 
 # Combine all source files
