@@ -1,29 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 14:04:14 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 14:04:50 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/07 14:06:46 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/07 14:07:02 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
+#include "Zombie.hpp"
 
-#include <iostream>
-
-class Zombie
+void Zombie::announce()
 {
-	public:
-		void announce(void);
-		void set_name(std::string _name);
-		~Zombie();
-	private:
-		std::string name;
-};
+	std::cout << name << ": BraiiiiiiinnnzzzZ..." << std::endl;
+}
 
-Zombie	*newZombie(std::string name);
-void	randomChump(std::string name);
-Zombie	*zombieHorde(int N, std::string name);
+void Zombie::set_name(std::string _name)
+{
+	name = _name;
+}
+
+Zombie::~Zombie()
+{
+	std::cout << name << " died" << std::endl;
+}
