@@ -12,9 +12,7 @@
 
 #include "Weapon.hpp"
 
-HumanB::HumanB(std::string _name) : name(_name)
-{
-}
+HumanB::HumanB(std::string _name) : name(_name) {}
 
 const std::string& HumanB::getName() const
 {
