@@ -17,7 +17,7 @@ NAME			:= phonebook
 CXX				:= g++
 
 # Compiler flags
-CXXFLAGS		:= -Wall -Wextra -Werror -std=c++11
+CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20
 DEBUG_FLAGS		:= -g3 -fsanitize=address -fsanitize=undefined
 OPTFLAGS		:= -O2
 
