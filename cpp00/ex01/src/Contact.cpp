@@ -1,32 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 18:07:07 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 23:27:49 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/11 17:47:32 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/11 17:47:38 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <string>
-#include <iostream>
-#include <iomanip>
 #include "Contact.hpp"
 
-class PhoneBook
-{
-	private:
-		Contact     contacts[8];
-		int         contact_limit;
-		int         contact_amount;
-		int         input;
-		std::string command;
-		int search_contacts();
-	public:
-		PhoneBook();
-		void getdata();
-};
+std::string Contact::get_first_name() { return first_name; }

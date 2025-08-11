@@ -11,6 +11,10 @@
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include "Contact.hpp"
+
+PhoneBook::PhoneBook() : contact_limit(0), contact_amount(0) {}
+
 
 static std::string get_input(const std::string &prompt)
 {
@@ -26,7 +30,7 @@ static std::string get_input(const std::string &prompt)
 	return (input);
 }
 
-static void	input_data(Contact &contact)
+void	Contact::input_data(Contact &contact)
 {
 	std::cout << "Enter contact information" << std::endl;
 
@@ -54,7 +58,7 @@ static void	print_line(std::string& str)
 		std::cout << std::setw(10) << str;
 }
 
-static void	print_contacts(Contact contacts[], int contact_amount)
+void	Contact::print_contacts(Contact contacts[], int contact_amount)
 {
 	for (int i = 0; i < contact_amount; i++) {
 		std::cout << std::setw(10) << std::left << i + 1 << "|";
@@ -64,7 +68,7 @@ static void	print_contacts(Contact contacts[], int contact_amount)
 	}
 }
 
-static void	print_single_contact(Contact contacts[], int index)
+void	Contact::print_single_contact(Contact contacts[], int index)
 {
 	std::cout << "first name:     ";
 	std::cout << contacts[index - 1].first_name     << std::endl;
@@ -92,7 +96,7 @@ int PhoneBook::search_contacts()
 		return 0;
 	}
 
-	print_contacts(contacts, contact_amount);
+	Contact::print_contacts(contacts, contact_amount);
 
 	while (true) {
 		command = get_input("Expand a contact");
@@ -113,7 +117,7 @@ int PhoneBook::search_contacts()
 
 		std::cout << "Invalid index! -- available contacts: " << contact_amount << std::endl;
 	}
-	print_single_contact(contacts, input);
+	Contact::print_single_contact(contacts, input);
 	return 0;
 }
 
@@ -130,8 +134,8 @@ void PhoneBook::getdata()
 
 		if (command == "ADD") {
 			index = contact_limit % 8;
-			input_data(contacts[index]);
-			if (!contacts[index].first_name.empty()) {
+			Contact::input_data(contacts[index]);
+			if (!contacts[index].get_first_name().empty()) {
 				contact_limit++;
 				if (contact_amount < 8)
 					contact_amount++;

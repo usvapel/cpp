@@ -51,6 +51,7 @@ RESET			:= $(shell tput sgr0)
 # Parsing and syntax analysis
 SRCS_MAIN := \
 	PhoneBook.cpp \
+	Contact.cpp \
 	main.cpp
 
 # Combine all source files
