@@ -13,6 +13,8 @@
 #pragma once
 
 #include <iostream>
+#include <string>
+#include <iomanip>
 
 class Contact
 {
@@ -28,3 +30,6 @@ class Contact
 		static void input_data(Contact &contact);
 		std::string get_first_name();
 };
+
+
+std::string get_input(const std::string &prompt);
