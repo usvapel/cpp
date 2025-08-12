@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Weapon.hpp"
+#include "HumanB.hpp"
 
 HumanB::HumanB(std::string _name) : name(_name) {}
 

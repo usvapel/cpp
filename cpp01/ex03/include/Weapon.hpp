@@ -23,26 +23,3 @@ class Weapon
 		const std::string &getType() const;
 		void		setType(std::string _type);
 };
-
-class HumanA
-{
-	private:
-		std::string name;
-		Weapon& weapon;
-	public:
-		HumanA(std::string _name, Weapon& _weapon);
-		const std::string& getName() const;
-		void attack();
-};
-
-class HumanB
-{
-	private:
-		std::string name;
-		Weapon* weapon;
-	public:
-		HumanB(std::string _name);
-		const std::string& getName() const;
-		void setWeapon(Weapon& _weapon);
-		void attack();
-};
