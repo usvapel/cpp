@@ -30,6 +30,3 @@ class Contact
 		static void input_data(Contact &contact);
 		std::string get_first_name();
 };
-
-
-std::string get_input(const std::string &prompt);

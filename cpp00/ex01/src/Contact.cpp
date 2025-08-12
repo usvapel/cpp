@@ -12,9 +12,26 @@
 
 #include "Contact.hpp"
 
-std::string Contact::get_first_name() { return first_name; }
+std::string Contact::get_first_name()
+{
+	return first_name;
+}
 
-static void	print_line(std::string& str)
+static std::string get_input(const std::string &prompt)
+{
+	std::string input;
+
+	do {
+		std::cout << prompt << std::endl;
+		std::cout << "> ";
+		if (!std::getline(std::cin, input))
+			return ("");
+	} while (input.empty());
+
+	return (input);
+}
+
+static void print_line(std::string& str)
 {
 	if (str.length() > 10)
 		std::cout << std::setw(10) << str.substr(0, 9) + ".";
@@ -42,7 +59,7 @@ void Contact::input_data(Contact &contact)
 	if (contact.darkest_secret.empty()) return ;
 }
 
-void	Contact::print_contacts(Contact contacts[], int contact_amount)
+void Contact::print_contacts(Contact contacts[], int contact_amount)
 {
 	for (int i = 0; i < contact_amount; i++) {
 		std::cout << std::setw(10) << std::left << i + 1 << "|";
@@ -52,7 +69,7 @@ void	Contact::print_contacts(Contact contacts[], int contact_amount)
 	}
 }
 
-void	Contact::print_single_contact(Contact contacts[], int index)
+void Contact::print_single_contact(Contact contacts[], int index)
 {
 	std::cout << "first name:     ";
 	std::cout << contacts[index - 1].first_name     << std::endl;
