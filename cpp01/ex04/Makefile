@@ -16,10 +16,6 @@
 NUM_CORES := $(shell \
 	if command -v nproc >/dev/null 2>&1; then \
 		nproc; \
-	elif command -v sysctl >/dev/null 2>&1; then \
-		sysctl -n hw.ncpu; \
-	else \
-		echo 4; \
 	fi)
 
 # Enable parallelism by default, unless user specified -j or we're in recursive make
@@ -32,7 +28,7 @@ endif
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= seduction
+NAME			:= sed
 CXX				:= g++
 
 # Compiler flags
@@ -170,7 +166,7 @@ clean:
 	@if [ -d $(OBJ_DIR) ]; then \
 		echo "> [ $(NAME) ] $(YELLOW) Cleaning object files...$(RESET)"; \
 		rm -rf $(OBJ_DIR); \
-		printf "> [ %-5s ] %b %s Object files cleaned!%b\n" "$(NAME)" \
+		printf "> [ %-3s ] %b %s Object files cleaned!%b\n" "$(NAME)" \
 		"$(YELLOW)" "$(NAME)" "$(RESET)"; \
 	else \
 		echo "> [ $(NAME) ] $(BOLD)$(YELLOW) Nothing to be done with \
@@ -182,7 +178,7 @@ fclean: clean
 	@if [ -f $(NAME) ]; then \
 		echo "> [ $(NAME) ] $(YELLOW) Removing $(NAME)...$(RESET)"; \
 		rm -f $(NAME) $(MARKER_STANDARD); \
-		printf "> [ %-5s ] %b %s removed!%b\n" "$(NAME)" "$(YELLOW)" \
+		printf "> [ %-3s ] %b %s removed!%b\n" "$(NAME)" "$(YELLOW)" \
 		"$(NAME)" "$(RESET)"; \
 	else \
 		echo "> [ $(NAME) ] $(BOLD)$(YELLOW) Nothing to be done with \
