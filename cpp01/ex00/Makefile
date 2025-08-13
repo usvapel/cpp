@@ -14,7 +14,7 @@
 
 # Project configuration
 NAME			:= Zombie
-CXX				:= g++
+CXX				:= c++
 
 # Compiler flags
 CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20

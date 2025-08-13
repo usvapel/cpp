@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PhoneBook.hpp                                      :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/05 18:07:07 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/05 23:27:49 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/13 19:05:15 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/13 19:05:20 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include <string>
 #include <iostream>
-#include <iomanip>
-#include "Contact.hpp"
 
-class PhoneBook
+class Harl
 {
 	private:
-		Contact     contacts[8];
-		int         contact_limit;
-		int         contact_amount;
-		std::string command;
-		int search_contacts();
+		void debug(void);
+		void info(void);
+		void warning(void);
+		void error(void);
 	public:
-		PhoneBook();
-		void getdata();
+		void complain(std::string level);
 };

@@ -29,7 +29,7 @@ endif
 
 # Project configuration
 NAME			:= sed
-CXX				:= g++
+CXX				:= c++
 
 # Compiler flags
 CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20

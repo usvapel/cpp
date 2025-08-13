@@ -31,7 +31,7 @@ static std::string get_input(const std::string &prompt)
 
 int PhoneBook::search_contacts()
 {
-	std::int32_t input{};
+	std::int32_t input {};
 	std::cout << "Available contacts:" << std::endl;
 
 	if (contact_amount == 0) {
