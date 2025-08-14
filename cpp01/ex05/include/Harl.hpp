@@ -14,6 +14,11 @@
 
 #include <iostream>
 
+#define DEBUG   "DEBUG"
+#define INFO    "INFO"
+#define WARNING "WARNING"
+#define ERROR   "ERROR"
+
 class Harl
 {
 	private:

@@ -10,25 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-# ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ PARALLEL ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
-
-# Detect CPU core count (Linux/macOS/Windows)
-NUM_CORES := $(shell \
-	if command -v nproc >/dev/null 2>&1; then \
-		nproc; \
-	fi)
-
-# Enable parallelism by default, unless user specified -j or we're in recursive make
-ifeq (,$(filter -j%, $(MAKEFLAGS)))
-ifeq ($(MAKELEVEL),0)
-	MAKEFLAGS += -j$(NUM_CORES)
-endif
-endif
-
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= sed
+NAME			:= Harl
 CXX				:= c++
 
 # Compiler flags
@@ -81,26 +66,24 @@ TOTAL_SRCS			:= $(words $(SRCS))
 # Build markers and progress tracking
 MARKER_STANDARD		:= .standard_build
 PROGRESS_FILE		:= $(OBJ_DIR)/.progress
-LOCK_FILE			:= $(OBJ_DIR)/.lock
 
 # Utility variables for build optimization
-LATEST_SRC			:= $(shell find $(SRC_DIR) -name "*.cpp" -type f \
-							-print0 2>/dev/null | xargs -0 ls -t 2>/dev/null \
-							| head -n 1)
+LATEST_SRC			:= $(shell find src -name "*.cpp" | \
+							xargs ls -t 2>/dev/null | head -1)
 OBJ_FILES_EXIST		:= $(shell [ -n "$(wildcard $(OBJ_DIR)/*.o)" ] \
 							&& echo yes)
 
 # Looking for updated header files
 LATEST_HEADER		:= $(shell find include \
-							-name "*.hpp" -type f -print0 2>/dev/null | xargs -0 ls -t \
-							2>/dev/null | head -n 1)
+							-name "*.hpp" 2>/dev/null | xargs ls -t \
+							2>/dev/null | head -1)
 
 # Check if binary is up to date
 is_up_to_date = \
 	[ -f $(NAME) ] && \
 	[ "$(NAME)" -nt $(LATEST_SRC) ] && \
 	[ "$(NAME)" -nt $(LATEST_HEADER) ] && \
-	[ -n "$(OBJ_FILES_EXIST)" ]
+	[ "$(OBJ_FILES_EXIST)" = "yes" ]
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ BUILD TARGETS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
@@ -110,7 +93,7 @@ all:
 		echo ">$(BOLD)$(YELLOW) $(NAME) is already up to date.$(RESET)"; \
 	else \
 		echo ">$(BOLD)$(WHITE) Starting to build $(NAME)...$(RESET)"; \
-		$(MAKE) -s $(NAME) --no-print-directory; \
+		$(MAKE) $(NAME) --no-print-directory; \
 		touch $(MARKER_STANDARD); \
 		echo ">$(BOLD)$(GREEN) All components built successfully!$(RESET)"; \
 	fi
@@ -120,39 +103,32 @@ $(NAME): $(OBJS)
 	@echo ">$(BOLD)$(GREEN) Linking $(NAME)...$(RESET)"
 	@$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS) $(OPTFLAGS)
 	@touch $(MARKER_STANDARD)
-	@rm -f $(PROGRESS_FILE) $(LOCK_FILE)
+	@rm -f $(PROGRESS_FILE)
 	@echo ">$(BOLD)$(GREEN) $(NAME) successfully compiled!$(RESET)"
 
 # Individual object file compilation with progress tracking
 $(OBJ_DIR)/%.o: %.cpp | $(OBJ_DIR) $(DEP_DIR)
-	@{ \
-		flock 9; \
+	@if [ -f $(PROGRESS_FILE) ]; then \
 		CURRENT=$$(cat $(PROGRESS_FILE)); \
 		NEXT=$$((CURRENT + 1)); \
 		echo "$$NEXT" > $(PROGRESS_FILE); \
-		BAR_COLOR="$(GREEN)"; ETA="--"; \
-		PERCENT=$$((NEXT*100/$(TOTAL_SRCS))); \
-		BAR_WIDTH=20; \
-		FILLED=$$((PERCENT * BAR_WIDTH / 100)); \
-		EMPTY=$$((BAR_WIDTH - FILLED)); \
-		BAR="$$(printf '%*s' $$FILLED '' | tr ' ' '=')$$(printf '%*s' $$EMPTY '' | tr ' ' '-')"; \
-		printf "> %b$(WHITE)[$(GREEN)%-*s$(WHITE)]$(GREEN)%b %3d%% $(CYAN)(%d/%d files)$(RESET) | Compiling %s...\n" \
-			"$$BAR_COLOR" $$BAR_WIDTH "$$BAR" "$(RESET)" $$PERCENT $$NEXT $(TOTAL_SRCS) "$<"; \
-	} 9>>$(LOCK_FILE)
+		printf "> [%3d%%] $(CYAN)(%d/%d files) Compiling $<... $(RESET)\n" \
+			$$((NEXT*100/$(TOTAL_SRCS))) $$((NEXT)) $(TOTAL_SRCS); \
+	fi
 	@$(CXX) $(CXXFLAGS) $(OPTFLAGS) $(DEPFLAGS) -c $< -o $@ $(INC)
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ ADDITIONAL TARGETS ■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Directory creation and dependency management
 $(OBJ_DIR):
-	@mkdir -p $@
+	@mkdir -p $(OBJ_DIR)
 	@echo "0" > $(PROGRESS_FILE)
-
-$(DEP_DIR): | $(OBJ_DIR)
-	@mkdir -p $@
 
 # Include auto-generated dependency files
 -include $(wildcard $(DEP_DIR)/*.d)
+
+$(DEP_DIR): | $(OBJ_DIR)
+	@mkdir -p $@
 
 # Development and debugging build configuration
 debug: CXXFLAGS	+= $(DEBUG_FLAGS)
@@ -167,7 +143,7 @@ clean:
 	@if [ -d $(OBJ_DIR) ]; then \
 		echo "> [ $(NAME) ] $(YELLOW) Cleaning object files...$(RESET)"; \
 		rm -rf $(OBJ_DIR); \
-		printf "> [ %-3s ] %b %s Object files cleaned!%b\n" "$(NAME)" \
+		printf "> [ %-5s ] %b %s Object files cleaned!%b\n" "$(NAME)" \
 		"$(YELLOW)" "$(NAME)" "$(RESET)"; \
 	else \
 		echo "> [ $(NAME) ] $(BOLD)$(YELLOW) Nothing to be done with \
@@ -178,8 +154,9 @@ clean:
 fclean: clean
 	@if [ -f $(NAME) ]; then \
 		echo "> [ $(NAME) ] $(YELLOW) Removing $(NAME)...$(RESET)"; \
-		rm -f $(NAME) $(MARKER_STANDARD); \
-		printf "> [ %-3s ] %b %s removed!%b\n" "$(NAME)" "$(YELLOW)" \
+		rm -f $(NAME); \
+		rm -f $(MARKER_STANDARD); \
+		printf "> [ %-5s ] %b %s removed!%b\n" "$(NAME)" "$(YELLOW)" \
 		"$(NAME)" "$(RESET)"; \
 	else \
 		echo "> [ $(NAME) ] $(BOLD)$(YELLOW) Nothing to be done with \
@@ -189,8 +166,8 @@ fclean: clean
 # Full rebuild from clean slate
 re:
 	@echo "> [ $(NAME) ] $(BOLD)$(WHITE) Rebuilding from scratch...$(RESET)"
-	@$(MAKE) -s fclean --no-print-directory
-	@$(MAKE) -s $(NAME) --no-print-directory
+	@$(MAKE) fclean --no-print-directory
+	@$(MAKE) $(NAME) --no-print-directory
 
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ TARGET DECLARATIONS ■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
