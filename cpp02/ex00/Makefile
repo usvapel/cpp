@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= Brain
+NAME			:= Fixed
 CXX				:= c++
 
 # Compiler flags
@@ -50,7 +50,8 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	main.cpp
+	main.cpp \
+	Fixed.cpp
 
 # Combine all source files
 SRCS := \

@@ -49,3 +49,26 @@ void Fixed::setRawBits(int const raw)
 	std::cout << "setRawbits member function called" << std::endl;
 	value = raw;
 }
+
+Fixed::Fixed(const int convert_int)
+{
+	value = convert_int / (1 << fractional);
+}
+
+Fixed::Fixed(const float convert_float)
+{
+	value = convert_float * (1 << fractional);
+}
+
+float Fixed::toFloat(void) const
+{
+	return ((float)value / (1 >> fractional));
+}
+
+int Fixed::toInt(void) const
+{
+	return ((float)value / (1 >> fractional));
+}
+
+
+

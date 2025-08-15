@@ -22,8 +22,17 @@ class Fixed
 	public:
 		Fixed();
 		Fixed(const Fixed& obj);
-		Fixed& operator=(const Fixed& other);
+		Fixed& operator = (const Fixed& other);
 		~Fixed();
+
 		int getRawBits(void) const;
 		void setRawBits(int const raw);
+		
+		Fixed(const int convert_int);
+		Fixed(const float convert_float);
+
+		float toFloat(void) const;
+		int toInt(void) const;
+
+		Fixed& operator << (const Fixed& value);
 };
