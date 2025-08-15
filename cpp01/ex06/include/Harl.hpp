@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/12 15:25:10 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/12 15:25:22 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/13 19:05:15 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/13 19:05:20 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-#include "Weapon.hpp"
+#include <iostream>
 
-class HumanB
+enum	e_options
 {
-	private:
-		std::string name;
-		Weapon* weapon;
-	public:
-		HumanB(std::string _name);
-		const std::string& getName() const;
-		void setWeapon(Weapon& _weapon);
-		void attack();
+	DEBUG,
+	INFO,
+	WARNING,
+	ERROR,
+	OTHER
+};
+
+class Harl
+{
+  private:
+	void debug(void);
+	void info(void);
+	void warning(void);
+	void error(void);
+
+  public:
+	void complain(std::string level);
 };

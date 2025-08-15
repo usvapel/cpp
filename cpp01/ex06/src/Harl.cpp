@@ -14,44 +14,62 @@
 
 void	Harl::debug(void)
 {
-	std::cout << "debug!" << std::endl;
+	std::cout << "[ DEBUG ]"   << std::endl;
+	std::cout << "debug!"      << std::endl;
 }
 
 void	Harl::info(void)
 {
-	std::cout << "info!" << std::endl;
+	std::cout << "[ INFO ]"    << std::endl;
+	std::cout << "info!"       << std::endl;
 }
 
 void	Harl::warning(void)
 {
-	std::cout << "warning!" << std::endl;
-
+	std::cout << "[ WARNING ]" << std::endl;
+	std::cout << "warning!"    << std::endl;
 }
 
 void	Harl::error(void)
 {
-	std::cout << "error!" << std::endl;
+	std::cout << "[ ERROR ]"   << std::endl;
+	std::cout << "error!"      << std::endl;
+}
 
+static int options(const std::string& s)
+{
+	if (s == "DEBUG"   ) return DEBUG;
+	if (s == "INFO"    ) return INFO;
+	if (s == "WARNING" ) return WARNING;
+	if (s == "ERROR"   ) return ERROR;
+	return OTHER;
 }
 
 void	Harl::complain(std::string level)
 {
 	void (Harl::*actions[])() = {
-		&Harl::debug, 
-		&Harl::info, 
-		&Harl::warning, 
+		&Harl::debug,
+		&Harl::info,
+		&Harl::warning,
 		&Harl::error
 	};
 
-	const std::string array[] = {
-		DEBUG,
-		INFO,
-		WARNING,
-		ERROR
-	};
+	switch (options(level))
+	{
+		case DEBUG:
+			(this->*actions[DEBUG])();
 
-	for (int i = 0; i < 4; i++)
-		if (level == array[i])
-			for (;  i < 4; i++)
-				(this->*actions[i])();
+		case INFO:
+			(this->*actions[INFO])();
+
+		case WARNING:
+			(this->*actions[WARNING])();
+
+		case ERROR:
+			(this->*actions[ERROR])();
+			break ;
+
+		default:
+			std::cout << "[ Probably complaining about insignificant problem ]" << std::endl;
+	}
 }

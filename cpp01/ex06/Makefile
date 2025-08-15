@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= Sed
+NAME			:= harlFilter
 CXX				:= c++
 
 # Compiler flags
@@ -50,6 +50,7 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
+	Harl.cpp \
 	main.cpp
 
 # Combine all source files

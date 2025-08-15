@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= brain
+NAME			:= Brain
 CXX				:= c++
 
 # Compiler flags

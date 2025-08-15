@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= weapon
+NAME			:= Weapon
 CXX				:= c++
 
 # Compiler flags
