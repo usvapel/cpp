@@ -20,20 +20,41 @@ class Fixed
 	private:
 		int	value;
 		static const int fractional = 8;
+
 	public:
 		Fixed();
 		Fixed(const Fixed& obj);
-		Fixed& operator = (const Fixed& obj);
 		~Fixed();
 
-		int getRawBits(void) const;
-		void setRawBits(int const raw);
+		int  getRawBits(void) const;
+		void setRawBits(int   const raw);
 		
-		Fixed(const int convert_int);
+		Fixed(const int   convert_int);
 		Fixed(const float convert_float);
 
 		float toFloat(void) const;
-		int toInt(void) const;
+		int   toInt(void)   const;
+
+		Fixed& operator =  (const Fixed& obj);
+		bool   operator >  (const Fixed& obj) const;
+		bool   operator <  (const Fixed& obj) const;
+		bool   operator >= (const Fixed& obj) const;
+		bool   operator <= (const Fixed& obj) const;
+		bool   operator == (const Fixed& obj) const;
+		bool   operator != (const Fixed& obj) const;
+		int    operator +  (const Fixed& obj);
+		int    operator -  (const Fixed& obj);
+		float  operator *  (const Fixed& obj);
+		int    operator /  (const Fixed& obj);
+		Fixed  operator ++ (int);
+		Fixed& operator ++ ();
+		Fixed  operator -- (int);
+		Fixed& operator -- ();
+
+		static Fixed& min(Fixed& obj1, Fixed& obj2);
+		static const Fixed& min(const Fixed& obj1, const Fixed& obj2);
+		static Fixed& max(Fixed& obj1, Fixed& obj2);
+		static const Fixed& max(const Fixed& obj1, const Fixed& obj2);
 };
 
 std::ostream& operator << (std::ostream& os, const Fixed& obj);
