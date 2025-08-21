@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= Brain
+NAME			:= bsp
 CXX				:= c++
 
 # Compiler flags
@@ -50,6 +50,9 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
+	Fixed.cpp \
+	bsp.cpp \
+	Point.cpp \
 	main.cpp
 
 # Combine all source files
