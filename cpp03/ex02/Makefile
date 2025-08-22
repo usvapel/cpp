@@ -13,11 +13,11 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= bsp
+NAME			:= FragTrap
 CXX				:= c++
 
 # Compiler flags
-CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20
+CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20 -Wshadow -Wno-shadow
 DEBUG_FLAGS		:= -g3 -fsanitize=address -fsanitize=undefined
 OPTFLAGS		:= -O2
 
@@ -50,9 +50,9 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	Fixed.cpp \
-	bsp.cpp \
-	Point.cpp \
+	ClapTrap.cpp \
+	ScavTrap.cpp \
+	FragTrap.cpp \
 	main.cpp
 
 # Combine all source files

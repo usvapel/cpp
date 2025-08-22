@@ -10,27 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int main()
 {
-	ScavTrap sonic("sonic");
-	ScavTrap knuckles("knuckles");
+	DiamondTrap sonic("sonic");
+	DiamondTrap knuckles("knuckles");
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.guardGate();
-	knuckles.guardGate();
+	knuckles.takeDamage(sonic.getAd());
+	sonic.whoAmI();
 	return 0;
 }

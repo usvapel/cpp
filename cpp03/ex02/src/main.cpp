@@ -10,27 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
 int main()
 {
-	ScavTrap sonic("sonic");
-	ScavTrap knuckles("knuckles");
+	FragTrap sonic("sonic");
+	FragTrap knuckles("knuckles");
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
+	knuckles.takeDamage(30);
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
+	knuckles.takeDamage(30);
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
+	knuckles.takeDamage(30);
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
+	knuckles.takeDamage(30);
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
+	knuckles.takeDamage(30);
 	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.attack("knuckles");
-	knuckles.takeDamage(20);
-	sonic.guardGate();
-	knuckles.guardGate();
+	knuckles.takeDamage(30);
+	sonic.highFivesGuys();
+	knuckles.highFivesGuys();
 	return 0;
 }

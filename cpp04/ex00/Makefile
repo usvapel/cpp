@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= ScavTrap
+NAME			:= DiamondTrap
 CXX				:= c++
 
 # Compiler flags
@@ -52,6 +52,8 @@ RESET			:= $(shell tput sgr0)
 SRCS_MAIN := \
 	ClapTrap.cpp \
 	ScavTrap.cpp \
+	FragTrap.cpp \
+	DiamondTrap.cpp \
 	main.cpp
 
 # Combine all source files

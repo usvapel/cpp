@@ -1,0 +1,50 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/22 17:43:18 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/22 17:43:28 by jpelline         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "FragTrap.hpp"
+
+FragTrap::FragTrap() {
+	std::cout << C_ORG "FragTrap " << C_GRY "Default constructor called" << std::endl;
+}
+
+FragTrap::FragTrap(const std::string _name) : ClapTrap(_name) {
+	std::cout << C_ORG "FragTrap " << C_GRY "Assignment constructor called" << std::endl;
+	hp = 100;
+	ep = 100;
+	ad = 30;
+}
+
+FragTrap::~FragTrap() {
+	std::cout << C_ORG "FragTrap " << C_GRY "Deconstructor called" << std::endl;
+}
+
+FragTrap::FragTrap(const FragTrap& obj) {
+	std::cout << C_ORG "FragTrap " << C_GRY "Copy constructor called" << std::endl;
+	*this = obj;
+}
+
+FragTrap& FragTrap::operator = (const FragTrap& obj) {
+	if (this == &obj)
+		return *this;
+	*this = obj;
+	return *this;
+}
+
+void FragTrap::highFivesGuys(void) {
+
+	if (!check_conditions(hp, ep, name))
+		return ;
+
+	std::cout	<< C_ORG "FragTrap " C_RST << name
+				<< " high fives positively!"
+				<< std::endl;
+}

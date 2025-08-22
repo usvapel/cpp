@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/21 18:38:00 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/21 18:43:17 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/22 17:54:11 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/22 17:59:40 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 #include <iostream>
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 #include "colors.hpp"
 
-class ClapTrap
+class DiamondTrap : public FragTrap, public ScavTrap
 {
-	protected:
-		const std::string name;
-		int          hp = 10;
-		unsigned int ep = 10;
-		unsigned int ad = 0;
+	private:
+		std::string name;
 	public:
-		ClapTrap();
-		ClapTrap(const std::string _name);
-		ClapTrap(const std::string _name, int _hp, int _ep, int _ad);
-		ClapTrap(const ClapTrap& obj);
-		~ClapTrap();
-		ClapTrap& operator = (const ClapTrap& obj);
+		DiamondTrap();
+		DiamondTrap(const std::string& name);
+		DiamondTrap(const DiamondTrap& obj);
+		DiamondTrap& operator = (const DiamondTrap& obj);
+		~DiamondTrap();
 		void attack(const std::string& target);
-		void takeDamage(unsigned int amount);
-		void beRepaired(unsigned int amount);
+		int getAd();
+		void whoAmI();
 };
-
-bool check_conditions(int hp, unsigned int ep, std::string name);
