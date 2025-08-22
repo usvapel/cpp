@@ -1,0 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/22 19:39:33 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/22 19:40:20 by jpelline         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#pragma once
+
+#include <iostream>
+#include "Animal.hpp"
+
+class Cat : public Animal
+{
+	public:
+		Cat();
+		Cat(const Cat& obj);
+		Cat& operator = (const Cat& obj);
+		~Cat();
+		Cat(std::string _type);
+		void makeSound() const;
+};

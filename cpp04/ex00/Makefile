@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= DiamondTrap
+NAME			:= Animal
 CXX				:= c++
 
 # Compiler flags
@@ -50,10 +50,11 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	ClapTrap.cpp \
-	ScavTrap.cpp \
-	FragTrap.cpp \
-	DiamondTrap.cpp \
+	Animal.cpp \
+	Dog.cpp \
+	Cat.cpp \
+	WrongAnimal.cpp \
+	WrongCat.cpp \
 	main.cpp
 
 # Combine all source files
