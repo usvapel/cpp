@@ -1,0 +1,20 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**/include",
+                "/usr/include",
+                "/usr/local/include",
+                "/usr/include/c++/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/c++",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "linux-gcc-x64",
+            "compileCommands": "${workspaceFolder}/cpp04/ex01/compile_commands.json"
+        }
+    ],
+    "version": 4
+}
