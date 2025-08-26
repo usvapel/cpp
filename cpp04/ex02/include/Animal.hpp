@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:57:52 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 23:14:53 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/22 19:37:01 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/22 19:39:17 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#pragma once
 
-Weapon::Weapon(std::string _type) : type(_type) {}
+#include <iostream>
 
-void Weapon::setType(std::string _type) {
-	type = _type;
-}
-
-const std::string& Weapon::getType() const {
-	return type;
-}
+class Animal
+{
+	protected:
+		Animal();
+		std::string type;
+	public:
+		Animal(const Animal& obj);
+		Animal& operator = (const Animal& obj);
+		std::string getType() const;
+		virtual void makeSound() const = 0;
+		virtual ~Animal();
+};

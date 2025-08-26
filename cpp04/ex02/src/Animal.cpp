@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:49:15 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/08 13:24:28 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/22 19:42:16 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/23 14:07:22 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanB.hpp"
+#include "Animal.hpp"
 
-HumanB::HumanB(std::string _name) : name(_name), weapon(NULL) {}
-
-const std::string& HumanB::getName() const {
-	return name;
+Animal::Animal() {
+	type = "Maybe an animal, maybe not";
 }
 
-void HumanB::attack() {
-	if (weapon)
-		std::cout << name << " is attacking with " << weapon->getType() << std::endl;
-	else
-		std::cout << name << " doesn't have a weapon " << std::endl;
+Animal::~Animal() {}
+
+Animal::Animal(const Animal& obj) {
+	*this = obj;
 }
 
-void HumanB::setWeapon(Weapon& _weapon) {
-	weapon = &_weapon;
+Animal& Animal::operator = (const Animal& obj) {
+	if (this == &obj)
+		return *this;
+	this->type = obj.type;
+	return *this;
+}
+
+void Animal::makeSound() const {
+	std::cout << "Animal sounds.." << std::endl;
+}
+
+std::string Animal::getType() const {
+	return type;
 }

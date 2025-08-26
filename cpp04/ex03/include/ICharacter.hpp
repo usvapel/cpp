@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:57:52 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 23:14:53 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/26 12:38:34 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/26 12:39:25 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#pragma once
 
-Weapon::Weapon(std::string _type) : type(_type) {}
+#include <iostream>
+#include "AMateria.hpp"
 
-void Weapon::setType(std::string _type) {
-	type = _type;
-}
-
-const std::string& Weapon::getType() const {
-	return type;
-}
+class ICharacter
+{
+	public:
+		virtual ~ICharacter() {}
+		virtual std::string const & getName() const = 0;
+		virtual void equip(AMateria* m) = 0;
+		virtual void unequip(int idx) = 0;
+		virtual void use(int idx, ICharacter& target) = 0;
+};

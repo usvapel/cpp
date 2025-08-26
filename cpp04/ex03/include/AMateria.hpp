@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   AMateria.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:57:52 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 23:14:53 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/26 12:32:55 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/26 12:38:25 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#pragma once
 
-Weapon::Weapon(std::string _type) : type(_type) {}
+#include <iostream>
+#include "ICharacter.hpp"
 
-void Weapon::setType(std::string _type) {
-	type = _type;
-}
-
-const std::string& Weapon::getType() const {
-	return type;
-}
+class AMateria
+{
+	protected:
+		std::string _type;
+	public:
+		AMateria(std::string const& type);
+		std::string const& getType() const;
+		virtual AMateria* clone() const = 0;
+		virtual void use(ICharacter& target);
+};

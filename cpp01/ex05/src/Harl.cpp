@@ -12,30 +12,24 @@
 
 #include "Harl.hpp"
 
-void	Harl::debug(void)
-{
+void	Harl::debug(void) {
 	std::cout << "debug!" << std::endl;
 }
 
-void	Harl::info(void)
-{
+void	Harl::info(void) {
 	std::cout << "info!" << std::endl;
 }
 
-void	Harl::warning(void)
-{
+void	Harl::warning(void) {
 	std::cout << "warning!" << std::endl;
 
 }
 
-void	Harl::error(void)
-{
+void	Harl::error(void) {
 	std::cout << "error!" << std::endl;
-
 }
 
-void	Harl::complain(std::string level)
-{
+void	Harl::complain(std::string level) {
 	void (Harl::*actions[])() = {
 		&Harl::debug, 
 		&Harl::info, 

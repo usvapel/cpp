@@ -15,12 +15,10 @@
 
 HumanA::HumanA(std::string _name, Weapon& _weapon) : name(_name), weapon(_weapon) {}
 
-const std::string& HumanA::getName() const
-{
+const std::string& HumanA::getName() const {
 	return name;
 }
 
-void HumanA::attack()
-{
+void HumanA::attack() {
 	std::cout << name << " is attacking with " << weapon.getType() << std::endl;
 }

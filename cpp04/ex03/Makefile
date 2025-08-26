@@ -13,7 +13,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= Animal
+NAME			:= Materia
 CXX				:= c++
 
 # Compiler flags
@@ -50,12 +50,10 @@ RESET			:= $(shell tput sgr0)
 
 # Parsing and syntax analysis
 SRCS_MAIN := \
-	Animal.cpp \
-	Dog.cpp \
-	Cat.cpp \
-	WrongAnimal.cpp \
-	WrongCat.cpp \
-	Brain.cpp \
+	AMateria.cpp \
+	ICharacter.cpp \
+	Ice.cpp \
+	Cure.cpp \
 	main.cpp
 
 # Combine all source files

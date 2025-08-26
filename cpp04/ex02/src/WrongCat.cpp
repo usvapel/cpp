@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.cpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:49:15 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/08 13:24:28 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/22 20:31:29 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/23 13:25:06 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
-#include "HumanB.hpp"
+#include "WrongCat.hpp"
 
-HumanB::HumanB(std::string _name) : name(_name), weapon(NULL) {}
-
-const std::string& HumanB::getName() const {
-	return name;
+WrongCat::WrongCat() {
+	type = "WrongCat";
 }
 
-void HumanB::attack() {
-	if (weapon)
-		std::cout << name << " is attacking with " << weapon->getType() << std::endl;
-	else
-		std::cout << name << " doesn't have a weapon " << std::endl;
+WrongCat::~WrongCat() {}
+
+WrongCat::WrongCat(const WrongCat& obj) : WrongAnimal() {
+	*this = obj;
 }
 
-void HumanB::setWeapon(Weapon& _weapon) {
-	weapon = &_weapon;
+WrongCat& WrongCat::operator = (const WrongCat& obj) {
+	if (this == &obj)
+		return *this;
+	this->type = obj.type;
+	return *this;
+}
+
+void WrongCat::makeSound() const {
+	std::cout << "Fake cat sounds (not real animal ((fake) animal))!!!!" << std::endl;
 }

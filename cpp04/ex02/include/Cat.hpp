@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:57:52 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 23:14:53 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/22 19:39:33 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/23 13:29:16 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#pragma once
 
-Weapon::Weapon(std::string _type) : type(_type) {}
+#include <iostream>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-void Weapon::setType(std::string _type) {
-	type = _type;
-}
-
-const std::string& Weapon::getType() const {
-	return type;
-}
+class Cat : public Animal
+{
+	private:
+		Brain* brain;
+	public:
+		Cat();
+		Cat(const Cat& obj);
+		Cat& operator = (const Cat& obj);
+		~Cat();
+		Cat(std::string _type);
+		void makeSound() const;
+};

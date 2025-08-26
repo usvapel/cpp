@@ -1,23 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.cpp                                         :+:      :+:    :+:   */
+/*   Brain.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 22:57:52 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/07 23:14:53 by jpelline         ###   ########.fr       */
+/*   Created: 2025/08/23 13:30:31 by jpelline          #+#    #+#             */
+/*   Updated: 2025/08/23 13:53:50 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "Brain.hpp"
 
-Weapon::Weapon(std::string _type) : type(_type) {}
+Brain::Brain() {}
 
-void Weapon::setType(std::string _type) {
-	type = _type;
+Brain::~Brain() {}
+
+Brain::Brain(const Brain& obj) {
+	for (int i = 0; i < 100; i++)
+		ideas[i] = obj.ideas[i];
 }
 
-const std::string& Weapon::getType() const {
-	return type;
+Brain Brain::operator = (const Brain& obj) {
+	if (this == &obj)
+	return *this;
+    
+	for (int i = 0; i < 100; i++)
+		ideas[i] = obj.ideas[i];
+
+    return *this;
 }
