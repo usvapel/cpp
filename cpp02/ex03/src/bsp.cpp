@@ -28,8 +28,7 @@ static Fixed triangle_area(const Fixed x1, const Fixed y1,
 	return area;
 }
 
-bool bsp(Point const a, Point const b, Point const c, Point const point)
-{
+bool bsp(Point const a, Point const b, Point const c, Point const point) {
 	Fixed areaABC = triangle_area(	a.get_x(), a.get_y(),
 									b.get_x(), b.get_y(),
 									c.get_x(), c.get_y() );
