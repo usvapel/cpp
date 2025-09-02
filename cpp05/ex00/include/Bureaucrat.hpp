@@ -32,3 +32,5 @@ class Bureaucrat
 		void inc_grade(int _value);
 		void dec_grade(int _value);
 };
+
+std::ostream& operator << (std::ostream& os, const Bureaucrat& obj);
