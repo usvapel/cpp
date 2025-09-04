@@ -6,15 +6,15 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 12:45:06 by jpelline          #+#    #+#             */
-/*   Updated: 2025/09/04 14:01:10 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/09/04 14:08:04 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
 static Fixed find_triangle_area(const Fixed x1, const Fixed y1,
-				  const Fixed x2, const Fixed y2,
-				  const Fixed x3, const Fixed y3) {
+								const Fixed x2, const Fixed y2,
+								const Fixed x3, const Fixed y3) {
 
 	Fixed x1Part = x1 * (y2 - y3);
 	Fixed x2Part = x2 * (y3 - y1);
