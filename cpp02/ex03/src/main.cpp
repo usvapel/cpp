@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 18:12:53 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/21 18:12:54 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:57:59 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int main()
 {
 	Point a(0, 0); 
 	Point b(10, 0);
-	Point c(10, 100);
-	Point point(54, 50);
+	Point c(5, 100);
+	Point point(5, 100);
 
 	std::cout << "Vertices of the triangle: " << std::endl;
 	std::cout << "a x(" << a.get_x() << "), y(" << a.get_y() << ")" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:28:34 by jpelline          #+#    #+#             */
-/*   Updated: 2025/09/04 13:47:15 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:56:17 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,11 @@ Fixed Fixed::operator - (const Fixed& obj) const {
 }
 
 Fixed Fixed::operator * (const Fixed& obj) const {
-	return Fixed((this->getRawBits() * obj.getRawBits()) >> fractional);
+	return Fixed((this->toFloat() * obj.toFloat()));
 }
 
 Fixed Fixed::operator / (const Fixed& obj) const {
-	return Fixed((this->getRawBits() << fractional) / obj.getRawBits());
+	return Fixed((this->toFloat()) / obj.toFloat());
 }
 
 Fixed Fixed::operator ++ (int) {
