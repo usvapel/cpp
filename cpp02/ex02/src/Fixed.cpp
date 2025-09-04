@@ -6,7 +6,7 @@
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 17:28:34 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/15 17:30:21 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:52:59 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,20 +55,20 @@ bool Fixed::operator != (const Fixed& obj) const {
 	return (this->value != obj.value);
 }
 
-int Fixed::operator + (const Fixed& obj) {
+Fixed Fixed::operator + (const Fixed& obj) const {
 	return (this->toFloat() + obj.toFloat());
 }
 
-int Fixed::operator - (const Fixed& obj) {
+Fixed Fixed::operator - (const Fixed& obj) const {
 	return (this->toFloat() - obj.toFloat());
 }
 
-float Fixed::operator * (const Fixed& obj) {
-	return (float)(this->toFloat() * obj.toFloat());
+Fixed Fixed::operator * (const Fixed& obj) const {
+	return Fixed((this->toFloat() * obj.toFloat()));
 }
 
-int Fixed::operator / (const Fixed& obj) {
-	return (this->value / obj.value);
+Fixed Fixed::operator / (const Fixed& obj) const {
+	return Fixed((this->toFloat()) / obj.toFloat());
 }
 
 Fixed Fixed::operator ++ (int) {

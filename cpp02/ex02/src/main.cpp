@@ -3,8 +3,8 @@
 
 void comparisonTests() {
     std::cout << "\n--- Comparison Operator Tests ---\n";
-    Fixed a(5);
-    Fixed b(10);
+    Fixed a(1);
+    Fixed b(3);
 
     std::cout << "a = " << a << ", b = " << b << "\n";
     std::cout << "a < b  : " << (a < b) << "\n";
@@ -17,8 +17,8 @@ void comparisonTests() {
 
 void arithmeticTests() {
     std::cout << "\n--- Arithmetic Operator Tests ---\n";
-    Fixed a(2);
-    Fixed b(3);
+    Fixed a(3);
+    Fixed b(1);
 
     std::cout << "a = " << a << ", b = " << b << "\n";
     std::cout << "a + b = " << (a + b) << "\n";
