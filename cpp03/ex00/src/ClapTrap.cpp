@@ -13,27 +13,23 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap() {
-	std::cout << C_GRY "Default constructor called" << std::endl;
+	std::cout	<< C_CYN "ClapTrap " C_RST
+				<< C_GRY "Default constructor called" C_RST << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string _name) : name(_name) {
-	std::cout << C_GRY "Assignment constructor called" << std::endl;
+	std::cout	<< C_CYN "ClapTrap " C_RST
+				<< C_GRY "Assignment constructor called" C_RST << std::endl;
 }
 
 ClapTrap::~ClapTrap() {
-	std::cout << C_GRY "Deconstructor called" << std::endl;
+	std::cout	<< C_CYN "ClapTrap " C_RST
+				<< C_GRY "Deconstructor called" C_RST << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& obj) {
-	std::cout << C_GRY "Copy constructor called" << std::endl;
-	*this = obj;
-}
-
-ClapTrap& ClapTrap::operator = (const ClapTrap& obj) {
-	if (this == &obj)
-		return *this;
-	*this = obj;
-	return *this;
+ClapTrap::ClapTrap(const ClapTrap& obj) : name(obj.name), hp(obj.hp), ep(obj.ep), ad(obj.ad) {
+	std::cout	<< C_CYN "ClapTrap " C_RST
+				<< C_GRY "Copy constructor called" C_RST << std::endl;
 }
 
 static bool check_conditions(int hp, unsigned int ep, std::string name)
@@ -56,16 +52,14 @@ void ClapTrap::attack(const std::string& target) {
 
 	std::cout	<< C_CYN "ClapTrap " C_RST << name
 				<< " attacks "  << target
-				<< ", causing " << ad
-				<< " points of damage!"
+				<< ", causing " C_YLW << ad
+				<< C_RST " points of damage!"
 				<< std::endl;
-
-	ClapTrap _target(target);
-	_target.takeDamage(this->ad);
 
 	ep -= 1;
 
-	std::cout   << name << " has " C_YLW << ep
+	std::cout	<< C_CYN "ClapTrap " C_RST << name
+				<< " has " C_YLW << ep
 				<< C_RST " energy points left!"
 				<< std::endl;
 }
@@ -73,8 +67,8 @@ void ClapTrap::attack(const std::string& target) {
 void ClapTrap::takeDamage(unsigned int amount) {
 
 	std::cout	<< C_CYN "ClapTrap " C_RST << name
-				<< " got hit for " << amount
-				<< " points of damage!"
+				<< " got hit for " C_YLW << amount
+				<< C_RST " points of damage!"
 				<< std::endl;
 
 	hp -= amount;
@@ -93,7 +87,8 @@ void ClapTrap::beRepaired(unsigned int amount) {
 	hp += amount;
 	ep -= 1;
 
-	std::cout   << name << " has " C_YLW << ep
+	std::cout	<< C_CYN "ClapTrap " C_RST << name
+				<< " has " C_YLW << ep
 				<< C_RST " energy points left!"
 				<< std::endl;
 }

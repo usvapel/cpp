@@ -25,7 +25,7 @@ class DiamondTrap : public FragTrap, public ScavTrap
 		DiamondTrap();
 		DiamondTrap(const std::string& name);
 		DiamondTrap(const DiamondTrap& obj);
-		DiamondTrap& operator = (const DiamondTrap& obj);
+		DiamondTrap& operator = (const DiamondTrap& obj) = delete;
 		~DiamondTrap();
 		void attack(const std::string& target);
 		int getAd();

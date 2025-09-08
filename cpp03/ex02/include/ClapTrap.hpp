@@ -24,11 +24,10 @@ class ClapTrap
 		unsigned int ad = 0;
 	public:
 		ClapTrap();
-		ClapTrap(const std::string _name);
-		ClapTrap(const std::string _name, int _hp, int _ep, int _ad);
+		ClapTrap(std::string _name);
 		ClapTrap(const ClapTrap& obj);
 		~ClapTrap();
-		ClapTrap& operator = (const ClapTrap& obj);
+		ClapTrap& operator = (const ClapTrap& obj) = delete;
 		void attack(const std::string& target);
 		void takeDamage(unsigned int amount);
 		void beRepaired(unsigned int amount);

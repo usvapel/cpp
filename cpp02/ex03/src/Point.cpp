@@ -12,9 +12,7 @@
 
 #include "Point.hpp"
 
-Point::Point() {
-	*this = Point(0, 0);
-}
+Point::Point() : x(0), y(0) {}
 
 Point::~Point() {}
 
@@ -22,17 +20,6 @@ Point::Point(const Point& obj) : x(obj.x), y(obj.y) {}
 
 Point::Point(const float _x, const float _y) : x(_x), y(_y) {}
 
-Point& Point::operator = (const Point& obj) {
-	if (this == &obj)
-		return *this;
-	*this = obj;
-	return *this;
-}
+const Fixed& Point::get_x() const { return x; }
 
-const Fixed& Point::get_x() const {
-	return x;
-}
-
-const Fixed& Point::get_y() const {
-	return y;
-}
+const Fixed& Point::get_y() const { return y; }

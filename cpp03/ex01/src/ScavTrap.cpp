@@ -13,30 +13,22 @@
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() {
-	std::cout << C_PUR "ScavTrap " << C_GRY "Default constructor called" << std::endl;
+	std::cout << C_PUR "ScavTrap " << C_GRY "Default constructor called" C_RST << std::endl;
 }
 
 ScavTrap::ScavTrap(const std::string _name) : ClapTrap(_name) {
-	std::cout << C_PUR "ScavTrap " << C_GRY "Assignment constructor called" << std::endl;
+	std::cout << C_PUR "ScavTrap " << C_GRY "Assignment constructor called" C_RST << std::endl;
 	hp = 100;
 	ep = 50;
 	ad = 20;
 }
 
 ScavTrap::~ScavTrap() {
-	std::cout << C_PUR "ScavTrap " << C_GRY "Deconstructor called" << std::endl;
+	std::cout << C_PUR "ScavTrap " << C_GRY "Deconstructor called" C_RST << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& obj) {
-	std::cout << C_PUR "ScavTrap " << C_GRY "Copy constructor called" << std::endl;
-	*this = obj;
-}
-
-ScavTrap& ScavTrap::operator = (const ScavTrap& obj) {
-	if (this == &obj)
-		return *this;
-	*this = obj;
-	return *this;
+ScavTrap::ScavTrap(const ScavTrap& obj) : ClapTrap(obj) {
+	std::cout << C_PUR "ScavTrap " << C_GRY "Copy constructor called" C_RST << std::endl;
 }
 
 void ScavTrap::guardGate() {

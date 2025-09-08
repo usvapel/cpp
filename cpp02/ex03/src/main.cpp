@@ -17,7 +17,7 @@ int main()
 	Point a(0, 0); 
 	Point b(10, 0);
 	Point c(5, 100);
-	Point point(5, 100);
+	Point point(5, 10);
 
 	std::cout << "Vertices of the triangle: " << std::endl;
 	std::cout << "a x(" << a.get_x() << "), y(" << a.get_y() << ")" << std::endl;

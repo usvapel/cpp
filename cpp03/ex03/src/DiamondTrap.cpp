@@ -13,7 +13,7 @@
 #include "DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap() {
-	std::cout << C_PNK "DiamondTrap " << C_GRY "Default constructor called" << std::endl;
+	std::cout << C_PNK "DiamondTrap " << C_GRY "Default constructor called" C_RST << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& _name) :
@@ -22,7 +22,7 @@ DiamondTrap::DiamondTrap(const std::string& _name) :
 													ScavTrap(_name),
 													name(_name) {
 
-	std::cout << C_PNK "DiamondTrap " << C_GRY "Assignment constructor called" << std::endl;
+	std::cout << C_PNK "DiamondTrap " << C_GRY "Assignment constructor called" C_RST << std::endl;
 
 	hp = FragTrap::defaultHp;
 	ep = ScavTrap::defaultEp;
@@ -31,28 +31,18 @@ DiamondTrap::DiamondTrap(const std::string& _name) :
 }
 
 DiamondTrap::~DiamondTrap() {
-	std::cout << C_PNK "DiamondTrap " << C_GRY "Deconstructor called" << std::endl;
+	std::cout << C_PNK "DiamondTrap " << C_GRY "Deconstructor called" C_RST << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& obj) {
-	std::cout << C_PNK "DiamondTrap " << C_GRY "Copy constructor called" << std::endl;
-	*this = obj;
-}
-
-DiamondTrap& DiamondTrap::operator = (const DiamondTrap& obj) {
-	if (this == &obj)
-		return *this;
-	*this = obj;
-	return *this;
+DiamondTrap::DiamondTrap(const DiamondTrap& obj) : FragTrap(obj), ScavTrap(obj), name(obj.name) {
+	std::cout << C_PNK "DiamondTrap " << C_GRY "Copy constructor called" C_RST << std::endl;
 }
 
 void DiamondTrap::attack(const std::string& target) {
 	ScavTrap::attack(target);
 }
 
-int DiamondTrap::getAd() {
-	return ad;
-}
+int DiamondTrap::getAd() { return ad; }
 
 void DiamondTrap::whoAmI() {
 	std::cout << C_PNK "DiamondTrap " C_RST << "My name is " << name << std::endl;
