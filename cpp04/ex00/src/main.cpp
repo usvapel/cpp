@@ -32,5 +32,6 @@ int	main(void)
 	std::cout << wrong->getType() << " " << std::endl;
 	wrong->makeSound();
 
+	delete meta; delete dog; delete cat; delete wrong;
 	return 0;
 }

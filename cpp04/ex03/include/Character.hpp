@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/22 19:46:26 by jpelline          #+#    #+#             */
-/*   Updated: 2025/08/22 19:46:43 by jpelline         ###   ########.fr       */
+/*   Created: 2025/09/08 19:41:09 by jpelline          #+#    #+#             */
+/*   Updated: 2025/09/08 19:42:11 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#pragma once
 
-Dog::Dog() {
-	type = "Dog";
-}
+#include "ICharacter.hpp"
 
-Dog::~Dog() {}
-
-Dog::Dog(const Dog& obj) {
-	*this = obj;
-}
-
-Dog& Dog::operator = (const Dog& obj) {
-	if (this == &obj)
-		return *this;
-	this->type = obj.type;
-	return *this;
-}
-
-void Dog::makeSound() const {
-	std::cout << "WOOF!!!!" << std::endl;
+class Character : public ICharacter
+{
+	private:
+		std::string name;
+	public:
+		Character();
+		~Character();
+		
 }
