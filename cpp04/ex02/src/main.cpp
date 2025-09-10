@@ -25,7 +25,7 @@ int	main(void)
 		
 	// for (int i = 0; i < 100; i++)
 	// 	delete animals[i];
-
+	//Animal a;
     std::cout << "=== Testing Deep Copy ===" << std::endl;
     
     // Test 1: Copy constructor

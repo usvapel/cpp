@@ -20,7 +20,8 @@ Cat::Cat() {
 
 Cat::~Cat() {
 	std::cout << C_GRY "Cat destructor" C_RST << std::endl;
-	delete brain;
+	if (brain)
+		delete brain;
 }
 
 Cat::Cat(const Cat& obj) : Animal() {
@@ -32,7 +33,8 @@ Cat& Cat::operator = (const Cat& obj) {
 	if (this == &obj)
 		return *this;
 	Animal::operator = (obj);
-	delete brain;
+	if (brain)
+		delete brain;
 	brain = new Brain(*obj.brain);
 	return *this;
 }

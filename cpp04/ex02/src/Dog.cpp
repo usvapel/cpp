@@ -20,7 +20,8 @@ Dog::Dog() {
 
 Dog::~Dog() {
 	std::cout << C_GRY "Dog destructor" C_RST << std::endl;
-	delete brain;
+	if (brain)
+		delete brain;
 }
 
 Dog::Dog(const Dog& obj) : Animal() {
@@ -32,7 +33,8 @@ Dog& Dog::operator = (const Dog& obj) {
 	if (this == &obj)
 		return *this;
 	Animal::operator = (obj);
-	delete brain;
+	if (brain)
+		delete brain;
 	brain = new Brain(*obj.brain);
 	return *this;
 }
