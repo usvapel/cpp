@@ -12,11 +12,16 @@
 
 #include "Brain.hpp"
 
-Brain::Brain() {}
+Brain::Brain() {
+	std::cout << C_GRY "Brain constructor" C_RST << std::endl;
+}
 
-Brain::~Brain() {}
+Brain::~Brain() {
+	std::cout << C_GRY "Brain destructor" C_RST << std::endl;
+}
 
 Brain::Brain(const Brain& obj) {
+	std::cout << C_GRY "Brain copy constructor" C_RST << std::endl;
 	for (int i = 0; i < 100; i++)
 		ideas[i] = obj.ideas[i];
 }

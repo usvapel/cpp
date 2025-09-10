@@ -13,12 +13,16 @@
 #include "Dog.hpp"
 
 Dog::Dog() {
+	std::cout << C_GRY "Dog constructor" C_RST << std::endl;
 	type = "Dog";
 }
 
-Dog::~Dog() {}
+Dog::~Dog() {
+	std::cout << C_GRY "Dog destructor" C_RST << std::endl;
+}
 
 Dog::Dog(const Dog& obj) {
+	std::cout << C_GRY "Dog copy constructor" C_RST << std::endl;
 	*this = obj;
 }
 

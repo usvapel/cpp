@@ -23,7 +23,7 @@ OPTFLAGS		:= -O2
 
 # Directory structure
 SRC_DIR			:= src
-OBJ_DIR			:= obj
+OBJ_DIR			:= .obj
 DEP_DIR			:= $(OBJ_DIR)/.deps
 
 VPATH			:= $(SRC_DIR)

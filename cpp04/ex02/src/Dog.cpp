@@ -13,18 +13,18 @@
 #include "Dog.hpp"
 
 Dog::Dog() {
-	std::cout << "Dog constructor called\n";
+	std::cout << C_GRY "Dog constructor" C_RST << std::endl;
 	type = "Dog";
 	brain = new Brain();
 }
 
 Dog::~Dog() {
-	std::cout << "Dog deconstructor called\n";
+	std::cout << C_GRY "Dog destructor" C_RST << std::endl;
 	delete brain;
 }
 
 Dog::Dog(const Dog& obj) : Animal() {
-	std::cout << "Dog copy constructor called\n";
+	std::cout << C_GRY "Dog copy constructor" C_RST << std::endl;
 	brain = new Brain(*obj.brain);
 }
 

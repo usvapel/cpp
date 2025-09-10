@@ -14,6 +14,7 @@
 
 #include <iostream>
 #include "WrongAnimal.hpp"
+#include "colors.hpp"
 
 class WrongCat : public WrongAnimal
 {
@@ -22,6 +23,5 @@ class WrongCat : public WrongAnimal
 		WrongCat(const WrongCat& obj);
 		WrongCat& operator = (const WrongCat& obj);
 		~WrongCat();
-		WrongCat(std::string _type);
 		void makeSound() const;
 };

@@ -13,12 +13,16 @@
 #include "Animal.hpp"
 
 Animal::Animal() {
-	type = "Maybe an animal, maybe not";
+	std::cout << C_GRY "Animal constructor" C_RST << std::endl;
+	type = "Maybe an Animal, maybe not";
 }
 
-Animal::~Animal() {}
+Animal::~Animal() {
+	std::cout << C_GRY "Animal destructor" C_RST << std::endl;
+}
 
 Animal::Animal(const Animal& obj) {
+	std::cout << C_GRY "Animal copy constructor" C_RST << std::endl;
 	*this = obj;
 }
 

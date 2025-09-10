@@ -13,12 +13,17 @@
 #include "Cat.hpp"
 
 Cat::Cat() {
+	std::cout << C_GRY "Cat constructor" C_RST << std::endl;
 	type = "Cat";
 }
 
-Cat::~Cat() {}
+Cat::~Cat() {
+	std::cout << C_GRY "Cat destructor" C_RST << std::endl;
+}
+
 
 Cat::Cat(const Cat& obj) {
+	std::cout << C_GRY "Cat copy constructor" C_RST << std::endl;
 	*this = obj;
 }
 

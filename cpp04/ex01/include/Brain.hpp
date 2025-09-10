@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include "colors.hpp"
 
 class Brain
 {

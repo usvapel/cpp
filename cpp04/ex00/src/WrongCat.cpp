@@ -13,12 +13,16 @@
 #include "WrongCat.hpp"
 
 WrongCat::WrongCat() {
+	std::cout << C_GRY "WrongCat constructor" C_RST << std::endl;
 	type = "WrongCat";
 }
 
-WrongCat::~WrongCat() {}
+WrongCat::~WrongCat() {
+	std::cout << C_GRY "WrongCat destructor" C_RST << std::endl;
+}
 
 WrongCat::WrongCat(const WrongCat& obj) {
+	std::cout << C_GRY "WrongCat copy constructor" C_RST << std::endl;
 	*this = obj;
 }
 
@@ -30,5 +34,5 @@ WrongCat& WrongCat::operator = (const WrongCat& obj) {
 }
 
 void WrongCat::makeSound() const {
-	std::cout << "Fake cat sounds (not real animal ((fake) animal))!!!!" << std::endl;
+	std::cout << "Fake cat sounds!!!!" << std::endl;
 }

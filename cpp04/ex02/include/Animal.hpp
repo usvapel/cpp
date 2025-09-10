@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include "colors.hpp"
 
 class Animal
 {
@@ -22,7 +23,7 @@ class Animal
 	public:
 		Animal(const Animal& obj);
 		Animal& operator = (const Animal& obj);
-		std::string getType() const;
-		virtual void makeSound() const = 0;
 		virtual ~Animal();
+		virtual std::string getType() const;
+		virtual void makeSound() const = 0;
 };

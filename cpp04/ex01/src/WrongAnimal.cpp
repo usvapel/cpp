@@ -13,12 +13,16 @@
 #include "WrongAnimal.hpp"
 
 WrongAnimal::WrongAnimal() {
+	std::cout << C_GRY "WrongAnimal constructor" C_RST << std::endl;
 	type = "Maybe an animal, maybe not";
 }
 
-WrongAnimal::~WrongAnimal() {}
+WrongAnimal::~WrongAnimal() {
+	std::cout << C_GRY "WrongAnimal destructor" C_RST << std::endl;
+}
 
 WrongAnimal::WrongAnimal(const WrongAnimal& obj) {
+	std::cout << C_GRY "WrongAnimal copy constructor" C_RST << std::endl;
 	*this = obj;
 }
 

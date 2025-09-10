@@ -15,16 +15,16 @@
 
 int	main(void)
 {
-	// Animal* animals[100];
+	Animal* animals[100];
 
-	// for (int i = 0; i < 50; i++)
-	// 	animals[i] = new Dog();
+	for (int i = 0; i < 50; i++)
+		animals[i] = new Dog();
 
-	// for (int i = 50; i < 100; i++)
-	// 	animals[i] = new Cat();
+	for (int i = 50; i < 100; i++)
+		animals[i] = new Cat();
 		
-	// for (int i = 0; i < 100; i++)
-	// 	delete animals[i];
+	for (int i = 0; i < 100; i++)
+		delete animals[i];
 
     std::cout << "=== Testing Deep Copy ===" << std::endl;
     
@@ -60,16 +60,16 @@ int	main(void)
     delete dog1;
     delete dog2;
     
-    // Test 4: Array test like your original
+    // Test 4: Array test 
     std::cout << "\n--- Test 4: Array Test ---" << std::endl;
-    Animal* animals[4];
-    animals[0] = new Dog();
-    animals[1] = new Cat();
-    animals[2] = new Dog(*static_cast<Dog*>(animals[0]));  // Copy
-    animals[3] = new Cat(*static_cast<Cat*>(animals[1]));  // Copy
+    Animal* animals1[4];
+    animals1[0] = new Dog();
+    animals1[1] = new Cat();
+    animals1[2] = new Dog(*static_cast<Dog*>(animals1[0]));  // Copy
+    animals1[3] = new Cat(*static_cast<Cat*>(animals1[1]));  // Copy
     
     for (int i = 0; i < 4; i++)
-        delete animals[i];  // Should not crash with deep copies
+        delete animals1[i];  // Should not crash with deep copies
     
     std::cout << "\nAll tests completed successfully!" << std::endl;
 

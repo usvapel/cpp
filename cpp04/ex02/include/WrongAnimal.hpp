@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include "colors.hpp"
 
 class WrongAnimal
 {
@@ -23,6 +24,6 @@ class WrongAnimal
 		WrongAnimal(const WrongAnimal& obj);
 		WrongAnimal& operator = (const WrongAnimal& obj);
 		virtual ~WrongAnimal();
-		std::string getType() const;
+		virtual std::string getType() const;
 		virtual void makeSound() const;
 };

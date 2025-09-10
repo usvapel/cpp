@@ -15,6 +15,7 @@
 #include <iostream>
 #include "Animal.hpp"
 #include "Brain.hpp"
+#include "colors.hpp"
 
 class Cat : public Animal
 {
@@ -25,6 +26,5 @@ class Cat : public Animal
 		Cat(const Cat& obj);
 		Cat& operator = (const Cat& obj);
 		~Cat();
-		Cat(std::string _type);
 		void makeSound() const;
 };

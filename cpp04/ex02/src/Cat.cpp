@@ -13,18 +13,18 @@
 #include "Cat.hpp"
 
 Cat::Cat() {
-	std::cout << "Cat constructor called\n";
+	std::cout << C_GRY "Cat constructor" C_RST << std::endl;
 	type = "Cat";
 	brain = new Brain();
 }
 
 Cat::~Cat() {
-	std::cout << "Cat deconstructor called\n";
+	std::cout << C_GRY "Cat destructor" C_RST << std::endl;
 	delete brain;
 }
 
 Cat::Cat(const Cat& obj) : Animal() {
-	std::cout << "Cat copy constructor called\n";
+	std::cout << C_GRY "Cat copy constructor" C_RST << std::endl;
 	brain = new Brain(*obj.brain);
 }
 
