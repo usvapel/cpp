@@ -28,16 +28,43 @@ Bureaucrat& Bureaucrat::operator = (const Bureaucrat& obj) {
 }
 
 std::ostream& operator << (std::ostream& os, const Bureaucrat& obj) {
-	(void)obj;
-	os << "hello\n";
+	os	<< "name: "
+		<< obj.getName()
+		<< '\n'
+		<< "grade: "
+		<< obj.getGrade()
+		<< '\n';
 	return os;
 }
 
-Bureaucrat::Bureaucrat(int _grade, const std::string _name) : name(_name) {
+const std::string& Bureaucrat::getName() const {
+	return name;
+}
+
+int Bureaucrat::getGrade() const {
+	return grade;
+}
+
+void Bureaucrat::inc_grade() {
+	if (grade - 1 < 1) {
+		throw GradeTooHighException("Cannot increment grade!");
+	} else {
+		--grade;
+	}
+}
+void Bureaucrat::dec_grade() {
+	if (grade + 1 > 150) {
+		throw GradeTooLowException("Cannot decrement grade!");
+	} else {
+		++grade;
+	}
+}
+
+Bureaucrat::Bureaucrat(int _grade, const std::string& _name) : name(_name) {
 	if (_grade < 1)
-		throw Bureaucrat::GradeTooHighException;
+		throw GradeTooHighException("Cannot initialize Bureaucrat: grade too high");
 	else if (_grade > 150)
-		throw Bureaucrat::GradeTooLowException;
+		throw GradeTooLowException("Cannot initialize Bureaucrat: grade too low");
 	else
 		grade = _grade;
 }

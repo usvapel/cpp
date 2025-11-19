@@ -12,7 +12,10 @@
 
 #pragma once
 
+#include <exception>
 #include <iostream>
+#include <optional>
+#include <stdexcept>
 
 class Bureaucrat
 {
@@ -22,15 +25,23 @@ class Bureaucrat
 
 	public:
 		Bureaucrat();
-		Bureaucrat(int _grade, const std::string _name);
+		Bureaucrat(int _grade, const std::string& _name);
 		Bureaucrat(const Bureaucrat& obj);
 		Bureaucrat& operator = (const Bureaucrat& obj);
 		~Bureaucrat();
 
 		const std::string& getName() const;
-		int getGrade();
-		void inc_grade(int _value);
-		void dec_grade(int _value);
+		int getGrade() const;
+		void inc_grade();
+		void dec_grade();
+
+		struct GradeTooHighException : std::runtime_error {
+			using std::runtime_error::runtime_error;
+		};
+
+		struct GradeTooLowException : std::runtime_error {
+			using std::runtime_error::runtime_error;
+		};
 };
 
 std::ostream& operator << (std::ostream& os, const Bureaucrat& obj);
