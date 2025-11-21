@@ -6,7 +6,7 @@
 #    By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/15 20:55:03 by jpelline          #+#    #+#              #
-#    Updated: 2025/08/07 22:25:24 by jpelline         ###   ########.fr        #
+#    Updated: 2025/11/21 15:49:17 by jpelline         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,8 @@ RESET			:= $(shell tput sgr0)
 # Parsing and syntax analysis
 SRCS_MAIN := \
 	Bureaucrat.cpp \
-	main.cpp \
-	Form.cpp
+	Form.cpp \
+	main.cpp
 
 # Combine all source files
 SRCS := \
