@@ -1,53 +1,55 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:12:42 by jpelline          #+#    #+#             */
-/*   Updated: 2025/11/24 16:47:08 by jpelline         ###   ########.fr       */
+/*   Updated: 2025/11/24 17:31:58 by jpelline         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-
-#include <exception>
 #include <iostream>
-#include <optional>
 #include <stdexcept>
 
-class Form;
+class	Bureaucrat;
 
-class Bureaucrat
+class AForm
 {
   private:
-	Bureaucrat();
+	AForm();
 	const std::string name;
-	int grade;
+	bool _is_signed;
+	const int sign_grade_requirement;
+	const int execute_grade_requirement;
 
   public:
-	Bureaucrat(int _grade, const std::string &_name);
-	Bureaucrat(const Bureaucrat &obj);
-	Bureaucrat &operator=(const Bureaucrat &obj);
-	~Bureaucrat();
+	AForm(const std::string _name, const int _sign_grade_requirement,
+		const int _execute_grade_requirement);
+	AForm(const AForm &obj) = delete;
+	AForm &operator=(const AForm &obj) = delete;
+	virtual ~AForm();
 
-	const std::string &getName() const;
-	int getGrade() const;
-	void inc_grade();
-	void dec_grade();
+	// getters
+	virtual const std::string get_name() const = 0;
+	bool is_signed() const;
+	int get_required_sign_grade() const;
+	int get_required_execute_grade() const;
+	virtual void execute() const;
 
-	void signForm(Form& form);
-
+	// exceptions
 	struct GradeTooHighException : std::runtime_error
 	{
 		using std::runtime_error::runtime_error;
 	};
-
 	struct GradeTooLowException : std::runtime_error
 	{
 		using std::runtime_error::runtime_error;
 	};
+
+	// members
+	void beSigned(const Bureaucrat &obj);
 };
 
-std::ostream &operator<<(std::ostream &os, const Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &os, const AForm &obj);

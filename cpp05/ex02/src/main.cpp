@@ -11,50 +11,43 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
 
 int main()
 {
-	std::optional<Bureaucrat> a;
-	std::optional<Form> form;
+	std::optional<Bureaucrat> crat;
 
 	try {
-		a.emplace(11, "Timmy");
+		crat.emplace(1, "Timmy");
 	} catch (const Bureaucrat::GradeTooHighException& e) {
 		std::cout << e.what() << '\n';
 	} catch (const Bureaucrat::GradeTooLowException& e) {
 		std::cout << e.what() << '\n';
 	}
 
-	if (a.has_value()) {
-		std::cout << *a;
-		std::cout << a->getGrade() << std::endl << std::endl;
+	if (crat.has_value()) {
+		std::cout << *crat;
+		std::cout << crat->getGrade() << std::endl << std::endl;
 	} else {
-		std::cout << a->getName() << " not constructed" << '\n';
+		std::cout << crat->getName() << " not constructed" << '\n';
 		return 0;
 	}
+
+	std::optional<ShrubberyCreationForm> shrub;
 
 	try {              //name //sign //execute
-		form.emplace("form", 0, 5);
-	} catch (const Form::GradeTooHighException& e) {
+		shrub.emplace("home");
+	} catch (const AForm::GradeTooHighException& e) {
 		std::cout << e.what() << '\n';
-	} catch (const Form::GradeTooLowException& e) {
+	} catch (const AForm::GradeTooLowException& e) {
 		std::cout << e.what() << '\n';
 	}
-	
-	if (form.has_value()) {
-		std::cout << *form;
+
+	if (shrub.has_value()) {
+		std::cout << *shrub << '\n';
 	} else {
-		std::cout << form->get_name() << " not constructed" << '\n';
+		std::cout << shrub->get_name() << " not constructed" << '\n';
 		return 0;
 	}
-
-	std::cout << a->getName() << " grade: " << a->getGrade() << '\n';
-	a->signForm(*form);
-	std::cout << "is form signed? " << (form->is_signed() ? "true" : "false") << '\n';
-	a->inc_grade();
-	std::cout << a->getName() << " grade: " << a->getGrade() << '\n';
-	a->signForm(*form);
-	std::cout << "is form signed? " << (form->is_signed() ? "true" : "false") << '\n';
-
+	crat->executeForm(*shrub);
 }

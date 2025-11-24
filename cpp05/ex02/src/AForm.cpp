@@ -1,15 +1,15 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-Form::Form() : name(nullptr),
+AForm::AForm() : name(nullptr),
 			_is_signed(false),
 			sign_grade_requirement(0),
 			execute_grade_requirement(0)
 {};
 
-Form::~Form() {};
+AForm::~AForm() {};
 
-Form::Form(const std::string _name,
+AForm::AForm(const std::string _name,
 		   const int _sign_grade_requirement,
 		   const int _execute_grade_requirement) : name(_name),
 			_is_signed(false),
@@ -22,23 +22,23 @@ Form::Form(const std::string _name,
 		throw GradeTooLowException("Cannot initialize form with a grade too high! (1-150)");
 };
 
-const std::string Form::get_name() const {
+const std::string AForm::get_name() const {
 	return name;
 }
 
-bool Form::is_signed() const {
+bool AForm::is_signed() const {
 	return _is_signed;
 }
 
-int Form::get_required_execute_grade() const {
+int AForm::get_required_execute_grade() const {
 	return execute_grade_requirement;
 }
 
-int Form::get_required_sign_grade() const {
+int AForm::get_required_sign_grade() const {
 	return sign_grade_requirement;
 }
 
-void Form::beSigned(const Bureaucrat& obj) {
+void AForm::beSigned(const Bureaucrat& obj) {
 	if (obj.getGrade() <= get_required_sign_grade()) {
 		_is_signed = true;
 	} else {
@@ -46,10 +46,12 @@ void Form::beSigned(const Bureaucrat& obj) {
 	}
 }
 
-std::ostream &operator<<(std::ostream &os, const Form& obj) {
-	os	<< "Form name: " << obj.get_name() << '\n'
-		<< "signed: " << (obj.is_signed() ? "true" : "false") << '\n'
-		<< "requried grade to sign: " << obj.get_required_sign_grade() << '\n'
+std::ostream &operator<<(std::ostream &os, const AForm& obj) {
+	os	<< "AForm name: " << obj.get_name() << '\n'
+		<< "Signed: " << (obj.is_signed() ? "true" : "false") << '\n'
+		<< "Required grade to sign: " << obj.get_required_sign_grade() << '\n'
 		<< "Required grade to execute: " << obj.get_required_execute_grade() << '\n';
 	return os;
 }
+
+void AForm::execute() const {}
