@@ -1,23 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 14:12:42 by jpelline          #+#    #+#             */
-/*   Updated: 2025/11/24 16:47:08 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #pragma once
 
+#include "AForm.hpp"
 #include <exception>
 #include <iostream>
 #include <optional>
 #include <stdexcept>
-
-class AForm;
 
 class Bureaucrat
 {
@@ -37,8 +24,8 @@ class Bureaucrat
 	void inc_grade();
 	void dec_grade();
 
-	void signForm(AForm& form);
-	void executeForm(const AForm& form);
+	void signForm(AForm &form);
+	void executeForm(const AForm &form);
 
 	struct GradeTooHighException : std::runtime_error
 	{

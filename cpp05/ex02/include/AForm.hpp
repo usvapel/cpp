@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   AForm.hpp                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 14:12:42 by jpelline          #+#    #+#             */
-/*   Updated: 2025/11/24 17:31:58 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
 #include <iostream>
 #include <stdexcept>
@@ -36,7 +26,8 @@ class AForm
 	bool is_signed() const;
 	int get_required_sign_grade() const;
 	int get_required_execute_grade() const;
-	virtual void execute() const;
+	void check_requirements(const Bureaucrat &obj) const;
+	virtual void execute(const Bureaucrat &executor) const;
 
 	// exceptions
 	struct GradeTooHighException : std::runtime_error

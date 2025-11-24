@@ -1,18 +1,9 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/24 17:38:51 by jpelline          #+#    #+#             */
-/*   Updated: 2025/11/24 17:48:23 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+#pragma once
 
 #include "AForm.hpp"
-#include <iostream>
+#include "Bureaucrat.hpp"
 #include <fstream>
+#include <iostream>
 
 class ShrubberyCreationForm : public AForm
 {
@@ -26,5 +17,5 @@ class ShrubberyCreationForm : public AForm
 	ShrubberyCreationForm operator=(const ShrubberyCreationForm &obj) = delete;
 	~ShrubberyCreationForm();
 	const std::string get_name() const override;
-	void execute() const override;
+	void execute(const Bureaucrat &executor) const override;
 };

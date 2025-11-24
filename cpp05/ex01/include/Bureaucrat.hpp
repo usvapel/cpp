@@ -1,23 +1,10 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.hpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/29 14:12:42 by jpelline          #+#    #+#             */
-/*   Updated: 2025/11/24 16:47:08 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #pragma once
 
 #include <exception>
 #include <iostream>
 #include <optional>
 #include <stdexcept>
-
-class Form;
+#include "Form.hpp"
 
 class Bureaucrat
 {

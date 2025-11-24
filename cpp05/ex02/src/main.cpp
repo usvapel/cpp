@@ -1,20 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 13:55:03 by jpelline          #+#    #+#             */
-/*   Updated: 2025/09/02 13:55:27 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 int main()
 {
+	// create bureaucrat
 	std::optional<Bureaucrat> crat;
 
 	try {
@@ -27,16 +18,20 @@ int main()
 
 	if (crat.has_value()) {
 		std::cout << *crat;
-		std::cout << crat->getGrade() << std::endl << std::endl;
 	} else {
 		std::cout << crat->getName() << " not constructed" << '\n';
 		return 0;
 	}
 
+
+	std::cout << '\n';
+
+
+	// create shrubbery form
 	std::optional<ShrubberyCreationForm> shrub;
 
-	try {              //name //sign //execute
-		shrub.emplace("home");
+	try {
+		shrub.emplace("shrub");
 	} catch (const AForm::GradeTooHighException& e) {
 		std::cout << e.what() << '\n';
 	} catch (const AForm::GradeTooLowException& e) {
@@ -49,5 +44,89 @@ int main()
 		std::cout << shrub->get_name() << " not constructed" << '\n';
 		return 0;
 	}
-	crat->executeForm(*shrub);
+
+	// try singing shrubbery
+	try {
+		crat->signForm(*shrub);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+
+	// try executing shrubbery
+	try {
+		crat->executeForm(*shrub);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+
+	
+	std::cout << '\n';
+
+
+	// create robotomy form
+	std::optional<RobotomyRequestForm> robo;
+
+	try {
+		robo.emplace("robo");
+	} catch (const AForm::GradeTooHighException& e) {
+		std::cout << e.what() << '\n';
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+	
+	if (robo.has_value()) {
+		std::cout << *robo << '\n';
+	} else {
+		std::cout << robo->get_name() << " not constructed" << '\n';
+		return 0;
+	}
+
+	// try signing robotomy
+	try {
+		crat->signForm(*robo);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+
+	// try executing robotomy
+	try {
+		crat->executeForm(*robo);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+
+	std::cout << '\n';
+
+
+	// create president form
+	std::optional<PresidentialPardonForm> pres;
+
+	try {
+		pres.emplace("pres");
+	} catch (const AForm::GradeTooHighException& e) {
+		std::cout << e.what() << '\n';
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+	
+	if (pres.has_value()) {
+		std::cout << *pres << '\n';
+	} else {
+		std::cout << pres->get_name() << " not constructed" << '\n';
+		return 0;
+	}
+
+	// try signing president
+	try {
+		crat->signForm(*pres);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
+
+	// try executing president
+	try {
+		crat->executeForm(*pres);
+	} catch (const AForm::GradeTooLowException& e) {
+		std::cout << e.what() << '\n';
+	}
 }

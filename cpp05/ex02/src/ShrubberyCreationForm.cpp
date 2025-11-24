@@ -1,5 +1,4 @@
 #include "ShrubberyCreationForm.hpp"
-#include "Bureaucrat.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string _target) : 
 			AForm("ShrubberyCreationForm", 145, 137),
@@ -12,8 +11,8 @@ const std::string ShrubberyCreationForm::get_name() const {
 	return AForm::get_name();
 }
 
-void ShrubberyCreationForm::execute() const {
-	std::cout << "hello" << '\n';
+void ShrubberyCreationForm::execute(const Bureaucrat& executor) const {
+	AForm::check_requirements(executor);
 	std::ofstream file(target+"_shrubbery");
 	if (file.is_open()) {
         file << R"(
@@ -597,4 +596,5 @@ void ShrubberyCreationForm::execute() const {
 		return ;
 	}
 	file.close();
+	std::cout << get_name() << ": a file with ASCII trees has been created!" << '\n';
 }

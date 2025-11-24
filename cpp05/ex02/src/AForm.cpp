@@ -54,4 +54,16 @@ std::ostream &operator<<(std::ostream &os, const AForm& obj) {
 	return os;
 }
 
-void AForm::execute() const {}
+void AForm::check_requirements(const Bureaucrat& obj) const {
+	if (is_signed()) {
+		if (obj.getGrade() > get_required_execute_grade())
+			throw AForm::GradeTooLowException("GradeTooLowException: grade too low");
+	} else {
+		std::cout << get_name() << " is not signed!" << '\n';
+		throw AForm::GradeTooLowException("GradeTooLowException: grade too low");
+	}
+}
+
+void AForm::execute(const Bureaucrat& executor) const {
+	(void)executor;
+}

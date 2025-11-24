@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jpelline <jpelline@student.hive.fi>        +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/02 13:52:50 by jpelline          #+#    #+#             */
-/*   Updated: 2025/09/02 13:53:16 by jpelline         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
@@ -81,10 +69,11 @@ Bureaucrat::Bureaucrat(int _grade, const std::string& _name) : name(_name) {
 }
 
 void Bureaucrat::executeForm(AForm const& form) {
-	if (getGrade() <= form.get_required_execute_grade()) {
-		form.execute();
+	try {
+		form.execute(*this);
 		std::cout << getName() << " executed " << form.get_name() << '\n';
-	} else {
-		std::cout << getName() << " couldn't execute form " << form.get_name() << ". grade too low" << '\n';
+	} catch (AForm::GradeTooLowException& e) {
+		std::cout << getName() << " couldn't execute form " << form.get_name()
+					<< ". grade too low" << '\n';
 	}
 }

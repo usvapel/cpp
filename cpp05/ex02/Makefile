@@ -53,6 +53,8 @@ SRCS_MAIN := \
 	Bureaucrat.cpp \
 	AForm.cpp \
 	ShrubberyCreationForm.cpp \
+	RobotomyRequestForm.cpp \
+	PresidentialPardonForm.cpp \
 	main.cpp
 
 # Combine all source files
