@@ -2,6 +2,7 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
 int main()
 {
@@ -129,4 +130,21 @@ int main()
 	} catch (const AForm::GradeTooLowException& e) {
 		std::cout << e.what() << '\n';
 	}
+
+	std::cout << '\n';
+
+	{
+		Intern someRandomIntern;
+		AForm* rrf;
+		rrf = someRandomIntern.makeForm("shrubbery creation", "Purra");
+		// rrf = someRandomIntern.makeForm("robotomy request", "Orpo");
+		// rrf = someRandomIntern.makeForm("presidential pardon", "Stubb");
+		// rrf = someRandomIntern.makeForm("invalid", "Stubb");
+		if (!rrf)
+			return 0;
+		std::cout << rrf->get_name() << '\n';
+		std::cout << *rrf << '\n';
+		delete rrf;
+	}
+
 }

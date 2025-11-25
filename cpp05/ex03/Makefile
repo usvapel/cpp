@@ -55,6 +55,7 @@ SRCS_MAIN := \
 	ShrubberyCreationForm.cpp \
 	RobotomyRequestForm.cpp \
 	PresidentialPardonForm.cpp \
+	Intern.cpp \
 	main.cpp
 
 # Combine all source files

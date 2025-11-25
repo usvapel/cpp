@@ -4,6 +4,7 @@
 #include "Bureaucrat.hpp"
 #include <fstream>
 #include <iostream>
+#include <random>
 
 class RobotomyRequestForm : public AForm
 {
