@@ -17,7 +17,7 @@ NAME			:= Bureaucrat
 CXX				:= c++
 
 # Compiler flags
-CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20 -Wshadow -Wno-shadow
+CXXFLAGS		:= -Wall -Wextra -Werror -std=c++20 -Wshadow
 DEBUG_FLAGS		:= -g3 -fsanitize=address -fsanitize=undefined
 OPTFLAGS		:= -O2
 
