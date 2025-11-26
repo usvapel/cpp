@@ -12,6 +12,5 @@ class ScalarConverter
 	ScalarConverter operator=(const ScalarConverter &obj) = delete;
 	~ScalarConverter();
 
-	template < typename T >
-	static void convert(const T& input);
+	static void convert(const std::string& input);
 };
