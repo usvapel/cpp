@@ -1,60 +1,67 @@
 #include "ScalarConverter.hpp"
-#include <exception>
-#include <stdexcept>
 
-ScalarConverter::ScalarConverter() {};
+const std::regex charRegex("^[^0-9]$");
+const std::regex intRegex("[-+]?[0-9]+");
+const std::regex doubleRegex(R"(^[-+]?\d*\.?\d+([eE][-+]?\d+)?$)");
+const std::regex floatRegex("^[-+]?([0-9]+[.][0-9]+|(inf|nan))?f$");
 
-ScalarConverter::~ScalarConverter() {};
-
-float convert_int(const std::string& input) {
-	(void)input;
-	return 0;
-}
-int check_type(const std::string& str) {
-
-	const std::regex charRegex("^[^0-9]$");
-	const std::regex intRegex("^[-+]?[0-9]+$");
-	const std::regex doubleRegex(R"(^[-+]?\d*\.?\d+([eE][-+]?\d+)?$)");
-	const std::regex floatRegex("^[-+]?([0-9]+[.][0-9]+|(inf|nan))?f$");
-
-	if (std::regex_match(str, charRegex)) {
-		std::cout << str << " is a char\n";
-		return CHAR;
-	} else if (std::regex_match(str, intRegex)) {
-		std::cout << str << " is an integer\n";
-		return INT;
-	} else if (std::regex_match(str, floatRegex)) {
-		std::cout << str << " is a float\n";
-		return FLOAT;
-	} else if (std::regex_match(str, doubleRegex)) {
-		std::cout << str << " is a double\n";
-		return DOUBLE;
-	}
-	std::cout << str << " is not a number\n";
-	return INVALID;
+std::ostream &convert_to_char(std::ostream &os, const std::string &literal) {
+  int value = 0;
+  try {
+    value = std::stoi(literal);
+  } catch (const std::out_of_range &e) {
+    std::cout << "stoi: std::out_of_range!" << '\n';
+    return os;
+  }
+  if (value < 32 || value > 126) {
+    return os << "char: Non displayable" << '\n';
+  }
+  char c = static_cast<char>(value);
+  return os << "char: " << c << '\n';
 }
 
-std::ostream& convert_to_char(std::ostream& os, const std::string& str) {
-	char c;
-	c = std::stoi(str);
-	if (c < 32) {
-		os << "Char: Non displayable";
-		return os;
-	}
-	os << "Char: " << c;
-	return os;
+std::ostream &convert_to_int(std::ostream &os, const std::string &literal) {
+  std::smatch match;
+
+  std::regex_search(literal, match, intRegex);
+  return os << "int: " << match.str() << '\n';
 }
 
-void ScalarConverter::convert(const std::string& str) {
-	unsigned int type = check_type(str);
-	try {
-		convert_to_char(std::cout, str) << '\n';
-	} catch (const std::invalid_argument& e) {
-		std::cout << "invalid argument!" << '\n';
-		return ;
-	}
-	std::cout << "char:   " << '\n';
-	std::cout << "int:    " << '\n';
-	std::cout << "float:  " << '\n';
-	std::cout << "double: " << '\n';
+std::ostream &convert_to_float(std::ostream &os, const std::string &literal) {
+  return os << "float: " << literal << '\n';
+}
+
+std::ostream &convert_to_double(std::ostream &os, const std::string &literal) {
+  return os << "double: " << literal << '\n';
+}
+
+void ScalarConverter::convert(const std::string &literal) {
+
+  if (std::regex_match(literal, charRegex)) {
+    std::cout << "char: " << literal << '\n';
+    convert_to_int(std::cout, literal);
+    convert_to_float(std::cout, literal);
+    convert_to_double(std::cout, literal);
+
+  } else if (std::regex_match(literal, intRegex)) {
+    convert_to_char(std::cout, literal);
+    std::cout << "int: " << literal << '\n';
+    convert_to_float(std::cout, literal);
+    convert_to_double(std::cout, literal);
+
+  } else if (std::regex_match(literal, floatRegex)) {
+    convert_to_char(std::cout, literal);
+    convert_to_int(std::cout, literal);
+    std::cout << "float: " << literal << '\n';
+    convert_to_double(std::cout, literal);
+
+  } else if (std::regex_match(literal, doubleRegex)) {
+    convert_to_char(std::cout, literal);
+    convert_to_int(std::cout, literal);
+    convert_to_float(std::cout, literal);
+    std::cout << "double: " << literal << '\n';
+
+  } else {
+    std::cout << literal << " invalid\n";
+  }
 }

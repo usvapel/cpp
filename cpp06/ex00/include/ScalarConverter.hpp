@@ -2,27 +2,24 @@
 
 #include <iostream>
 #include <optional>
+#include <regex>
 #include <sstream>
 #include <string>
-#include <regex>
 
 enum e {
-	CHAR,
-	INT,
-	FLOAT,
-	DOUBLE,
-	INVALID,
+  CHAR,
+  INT,
+  FLOAT,
+  DOUBLE,
+  INVALID,
 };
 
-class ScalarConverter
-{
-  private:
-	ScalarConverter();
+class ScalarConverter {
+public:
+  ScalarConverter() = delete;
+  ScalarConverter(const ScalarConverter &obj) = delete;
+  ScalarConverter operator=(const ScalarConverter &obj) = delete;
+  ~ScalarConverter() = default;
 
-  public:
-	ScalarConverter(const ScalarConverter &obj) = delete;
-	ScalarConverter operator=(const ScalarConverter &obj) = delete;
-	~ScalarConverter();
-
-	static void convert(const std::string& input);
+  static void convert(const std::string &);
 };
