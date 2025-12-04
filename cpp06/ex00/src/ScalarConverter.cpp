@@ -1,9 +1,10 @@
 #include "ScalarConverter.hpp"
 
 const std::regex charRegex("^[^0-9]$");
-const std::regex intRegex("[-+]?[0-9]+");
+const std::regex intRegex("[-+]?[0-9]+[^.]?+");
 const std::regex floatRegex("[-+]?([0-9]+[.][0-9]+|(inf|nan))f");
 const std::regex doubleRegex("[-+]?([0-9]+[.][0-9]+|(inf|nan))");
+const std::regex specialRegex("[-+]?(inf|nan)f?");
 
 std::ostream &convert_to_char(std::ostream &os, const std::string &literal) {
   // some bullshit
@@ -18,6 +19,8 @@ std::ostream &convert_to_char(std::ostream &os, const std::string &literal) {
 std::ostream &convert_to_int(std::ostream &os, const std::string &literal) {
   std::smatch match;
 
+  if (std::regex_search(literal, match, specialRegex))
+		return os << "int: impossible" << '\n';
   if (std::regex_search(literal, match, intRegex))
     return os << "int: " << match.str() << '\n';
   // for non digit literals
@@ -27,19 +30,29 @@ std::ostream &convert_to_int(std::ostream &os, const std::string &literal) {
 std::ostream &convert_to_float(std::ostream &os, const std::string &literal) {
   std::smatch match;
 
+  // order matters
   if (std::regex_search(literal, match, charRegex))
     return os << "float: " << static_cast<int>(literal[0]) << ".0f" << '\n';
-  if (std::regex_search(literal, match, intRegex))
-    return os << "float: " << match.str().append(".0f") << '\n';
   if (std::regex_search(literal, match, floatRegex))
     return os << "float: " << match.str() << '\n';
   if (std::regex_search(literal, match, doubleRegex))
     return os << "float: " << match.str().append("f") << '\n';
-  return os;
+  if (std::regex_search(literal, match, intRegex))
+    return os << "float: " << match.str().append(".0f") << '\n';
+  return os << "float: impossible" << '\n';
 }
 
 std::ostream &convert_to_double(std::ostream &os, const std::string &literal) {
-  return os << "double: " << literal << '\n';
+  std::smatch match;
+
+  // order matters
+  if (std::regex_search(literal, match, charRegex))
+    return os << "double: " << static_cast<int>(literal[0]) << ".0" << '\n';
+  if (std::regex_search(literal, match, doubleRegex))
+    return os << "double: " << match.str() << '\n';
+  if (std::regex_search(literal, match, intRegex))
+    return os << "double: " << match.str().append(".0") << '\n';
+  return os << "double: impossible" << '\n';
 }
 
 void ScalarConverter::convert(const std::string &literal) {
@@ -55,9 +68,9 @@ void ScalarConverter::convert(const std::string &literal) {
     std::cout << literal << " invalid\n";
     return;
   }
-
-  convert_to_char(std::cout, literal, type);
-  convert_to_int(std::cout, literal, type);
-  convert_to_float(std::cout, literal, type);
-  convert_to_double(std::cout, literal, type);
+  (void)type;
+  // convert_to_char(std::cout, literal);
+  convert_to_int(std::cout, literal);
+  convert_to_float(std::cout, literal);
+  convert_to_double(std::cout, literal);
 }
