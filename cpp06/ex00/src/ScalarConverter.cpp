@@ -6,71 +6,108 @@ const std::regex floatRegex("[-+]?([0-9]+[.][0-9]+|(inf|nan))f");
 const std::regex doubleRegex("[-+]?([0-9]+[.][0-9]+|(inf|nan))");
 const std::regex specialRegex("[-+]?(inf|nan)f?");
 
-std::ostream &convert_to_char(std::ostream &os, const std::string &literal) {
-  // some bullshit
-  unsigned value = (literal.size() == 1 && !std::isdigit(literal[0]))
-                       ? literal[0]
-                       : std::stoi(literal);
-  if (value < 32 || value > 126)
-    return os << "char: Non displayable" << '\n';
-  return os << "char: '" << static_cast<char>(value) << "'" << '\n';
+std::optional<char> convert_to_char(const std::string &literal) {
+  return std::make_optional<char>(literal[0]);
 }
 
-std::ostream &convert_to_int(std::ostream &os, const std::string &literal) {
-  std::smatch match;
-
-  if (std::regex_search(literal, match, specialRegex))
-		return os << "int: impossible" << '\n';
-  if (std::regex_search(literal, match, intRegex))
-    return os << "int: " << match.str() << '\n';
-  // for non digit literals
-  return os << "int: " << static_cast<int>(literal[0]) << '\n';
+std::optional<int> convert_to_int(const std::string &literal) {
+  return std::make_optional<int>(std::stoi(literal));
 }
 
-std::ostream &convert_to_float(std::ostream &os, const std::string &literal) {
-  std::smatch match;
-
-  // order matters
-  if (std::regex_search(literal, match, charRegex))
-    return os << "float: " << static_cast<int>(literal[0]) << ".0f" << '\n';
-  if (std::regex_search(literal, match, floatRegex))
-    return os << "float: " << match.str() << '\n';
-  if (std::regex_search(literal, match, doubleRegex))
-    return os << "float: " << match.str().append("f") << '\n';
-  if (std::regex_search(literal, match, intRegex))
-    return os << "float: " << match.str().append(".0f") << '\n';
-  return os << "float: impossible" << '\n';
+std::optional<float> convert_to_float(const std::string &literal) {
+  return std::make_optional<float>(std::stof(literal));
 }
 
-std::ostream &convert_to_double(std::ostream &os, const std::string &literal) {
-  std::smatch match;
+std::optional<double> convert_to_double(const std::string &literal) {
+  return std::make_optional<double>(std::stod(literal));
+}
 
-  // order matters
-  if (std::regex_search(literal, match, charRegex))
-    return os << "double: " << static_cast<int>(literal[0]) << ".0" << '\n';
-  if (std::regex_search(literal, match, doubleRegex))
-    return os << "double: " << match.str() << '\n';
-  if (std::regex_search(literal, match, intRegex))
-    return os << "double: " << match.str().append(".0") << '\n';
-  return os << "double: impossible" << '\n';
+std::ostream &char_conversion(std::ostream &os, std::optional<char> literal) {
+  os << "char\n";
+  return os << "char: " << *literal << '\n'
+            << "int: " << *literal << '\n'
+            << "float: " << *literal << ".0f" << '\n'
+            << "double: " << *literal << ".0" << '\n';
+}
+
+std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
+
+  os << "int\n";
+  return os << "char: "
+            << (*literal < 255 && std::isprint(*literal)
+                    ? std::string(1, static_cast<char>(*literal))
+                    : "impossible")
+            << '\n'
+            << "int: " << *literal << '\n'
+            << "float: " << *literal << ".0f" << '\n'
+            << "double: " << *literal << ".0" << '\n';
+}
+
+std::ostream &float_conversion(std::ostream &os, std::optional<float> literal) {
+  os << "float\n";
+  return os << "char: " << *literal << '\n'
+            << "int: " << *literal << '\n'
+            << "float: " << *literal
+            << (std::trunc(*literal) != *literal ? "f" : ".0f") << '\n'
+            << "double: " << *literal << '\n';
+}
+
+std::ostream &double_conversion(std::ostream &os,
+                                std::optional<double> literal) {
+  os << "double\n";
+  return os << "char: " << *literal << '\n'
+            << "int: " << *literal << '\n'
+            << "float: " << *literal << '\n'
+            << "double: " << *literal << '\n';
 }
 
 void ScalarConverter::convert(const std::string &literal) {
-  int type;
 
-  type = std::regex_match(literal, charRegex)     ? CHAR
-         : std::regex_match(literal, intRegex)    ? INT
-         : std::regex_match(literal, floatRegex)  ? FLOAT
-         : std::regex_match(literal, doubleRegex) ? DOUBLE
-                                                  : INVALID;
+  // detect type
+  int type = std::regex_match(literal, charRegex)     ? CHAR
+             : std::regex_match(literal, intRegex)    ? INT
+             : std::regex_match(literal, floatRegex)  ? FLOAT
+             : std::regex_match(literal, doubleRegex) ? DOUBLE
+                                                      : INVALID;
+  std::optional<char> char_literal;
+  std::optional<int> int_literal;
+  std::optional<float> float_literal;
+  std::optional<double> double_literal;
 
-  if (type == INVALID) {
-    std::cout << literal << " invalid\n";
+  // convert to type
+  switch (type) {
+
+  case CHAR:
+    char_literal = convert_to_char(literal);
+    break;
+
+  case INT:
+    try {
+      int_literal = convert_to_int(literal);
+    } catch (const std::out_of_range &e) {
+      std::cout << "value out of range!" << '\n';
+    }
+    break;
+
+  case FLOAT:
+    float_literal = convert_to_float(literal);
+    break;
+
+  case DOUBLE:
+    double_literal = convert_to_double(literal);
+    break;
+
+  case INVALID:
+    std::cout << "<" << literal << "> invalid input\n";
     return;
   }
-  (void)type;
-  // convert_to_char(std::cout, literal);
-  convert_to_int(std::cout, literal);
-  convert_to_float(std::cout, literal);
-  convert_to_double(std::cout, literal);
+  // convert to all other types.. what is wrong with this subject wth..
+  if (char_literal.has_value())
+    char_conversion(std::cout, char_literal);
+  if (int_literal.has_value())
+    int_conversion(std::cout, int_literal);
+  if (float_literal.has_value())
+    float_conversion(std::cout, float_literal);
+  if (double_literal.has_value())
+    double_conversion(std::cout, double_literal);
 }

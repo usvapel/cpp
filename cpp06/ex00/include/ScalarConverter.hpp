@@ -3,8 +3,7 @@
 #include <iostream>
 #include <optional>
 #include <regex>
-#include <sstream>
-#include <string>
+#include <cmath>
 
 enum e {
   CHAR,
