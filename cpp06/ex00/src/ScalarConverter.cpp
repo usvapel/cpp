@@ -21,7 +21,7 @@ std::optional<float> convert_to_float(const std::string &literal) {
 std::optional<double> convert_to_double(const std::string &literal) {
   return std::make_optional<double>(std::stod(literal));
 }
-// done
+
 std::ostream &char_conversion(std::ostream &os, std::optional<char> literal) {
   os << "char\n";
   return os << "char: " << *literal << '\n'
@@ -29,7 +29,7 @@ std::ostream &char_conversion(std::ostream &os, std::optional<char> literal) {
             << "float: " << static_cast<float>(*literal) << ".0f" << '\n'
             << "double: " << static_cast<double>(*literal) << ".0" << '\n';
 }
-// done
+
 std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
 
   os << "int\n";
@@ -43,34 +43,51 @@ std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
             << "double: " << *literal << ".0" << '\n';
 }
 
+template <typename T> static bool has_decimal(std::optional<T> literal) {
+  std::ostringstream stream;
+  stream << *literal;
+  std::string str = stream.str();
+  bool has_decimal = str.find('.') != std::string::npos;
+  return has_decimal;
+}
+
 std::ostream &float_conversion(std::ostream &os, std::optional<float> literal) {
   os << "float\n";
-  return os << "char: "
-            << (*literal >= 0 && *literal < 128 &&
-                        std::isprint(static_cast<int>(*literal))
-                    ? std::string(1, static_cast<char>(*literal))
-                    : "impossible")
-            << '\n'
-            << "int: " << static_cast<int>(*literal) << '\n'
-            << "float: " << *literal
-            << (std::trunc(*literal) != *literal ? "f" : ".0f") << '\n'
-            << "double: " << *literal
-            << (std::trunc(*literal) != *literal ? "" : ".0") << '\n';
+  os << "char: "
+     << (*literal >= 0 && *literal < 128 &&
+                 std::isprint(static_cast<int>(*literal))
+             ? std::string(1, static_cast<char>(*literal))
+             : "impossible")
+     << '\n';
+
+  os << "int: " << static_cast<int>(*literal) << '\n';
+
+  os << "float: " << *literal << (has_decimal(literal) ? "f" : ".0f") << '\n';
+
+  os << "double: " << static_cast<double>(*literal)
+     << (has_decimal(literal) ? "" : ".0") << '\n';
+
+  return os;
 }
 
 std::ostream &double_conversion(std::ostream &os,
                                 std::optional<double> literal) {
   os << "double\n";
-  return os << "char: "
-            << (*literal < 255 && std::isprint(*literal)
-                    ? std::string(1, static_cast<char>(*literal))
-                    : "impossible")
-            << '\n'
-            << "int: " << static_cast<int>(*literal) << '\n'
-            << "float: " << *literal
-            << (std::trunc(*literal) != *literal ? "f" : ".0f") << '\n'
-            << "double: " << *literal
-            << (std::trunc(*literal) != *literal ? "" : ".0") << '\n';
+  os << "char: "
+     << (*literal >= 0 && *literal < 128 &&
+                 std::isprint(static_cast<int>(*literal))
+             ? std::string(1, static_cast<char>(*literal))
+             : "impossible")
+     << '\n';
+
+  os << "int: " << static_cast<int>(*literal) << '\n';
+
+  os << "float: " << static_cast<float>(*literal)
+     << (has_decimal(literal) ? "f" : ".0f") << '\n';
+
+  os << "double: " << *literal << (has_decimal(literal) ? "" : ".0") << '\n';
+
+  return os;
 }
 
 void ScalarConverter::convert(const std::string &literal) {
