@@ -4,6 +4,7 @@
 #include <optional>
 #include <regex>
 #include <cmath>
+#include <limits.h>
 
 enum e {
   CHAR,
