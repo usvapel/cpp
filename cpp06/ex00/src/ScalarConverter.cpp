@@ -40,9 +40,8 @@ std::ostream &char_conversion(std::ostream &os, std::optional<char> literal) {
 
 std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
   os << "char: "
-     << (*literal < 255 && std::isprint(*literal)
-             ? std::string(1, static_cast<char>(*literal))
-             : "impossible")
+     << (std::isprint(*literal) ? std::string(1, static_cast<char>(*literal))
+                                : "impossible")
      << '\n';
   os << "int: " << *literal << '\n';
   os << "float: " << *literal << ".0f" << '\n';
@@ -52,8 +51,7 @@ std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
 
 std::ostream &float_conversion(std::ostream &os, std::optional<float> literal) {
   os << "char: "
-     << (*literal >= 0 && *literal < 128 &&
-                 std::isprint(static_cast<int>(*literal))
+     << (*literal >= 32 && *literal <= 126
              ? std::string(1, static_cast<char>(*literal))
              : "impossible")
      << '\n';
@@ -76,8 +74,7 @@ std::ostream &float_conversion(std::ostream &os, std::optional<float> literal) {
 std::ostream &double_conversion(std::ostream &os,
                                 std::optional<double> literal) {
   os << "char: "
-     << (*literal >= 0 && *literal < 128 &&
-                 std::isprint(static_cast<int>(*literal))
+     << (*literal >= 32 && *literal <= 126
              ? std::string(1, static_cast<char>(*literal))
              : "impossible")
      << '\n';
