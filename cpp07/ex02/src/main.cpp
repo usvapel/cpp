@@ -1,38 +1,53 @@
-#include "A.hpp"
-#include "B.hpp"
-#include "Base.hpp"
-#include "C.hpp"
-#include <random>
+#include <iostream>
+#include <Array.hpp>
 
-Base *generate(void) {
-  std::random_device rd;
-  std::mt19937 gen(rd());
-  std::uniform_int_distribution<> distrib(1, 3);
-  switch (distrib(gen)) {
-  case 1:
-    return new A;
-  case 2:
-    return new B;
-  case 3:
-    return new C;
-  }
-  return nullptr;
-}
+#define MAX_VAL 750
+int main(int, char**)
+{
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-void identify(Base *p) {
-  if (dynamic_cast<A *>(p))
-    std::cout << "A" << '\n';
-  else if (dynamic_cast<B *>(p))
-    std::cout << "B" << '\n';
-  else if (dynamic_cast<C *>(p))
-    std::cout << "C" << '\n';
-}
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
-void identify(Base &p) { identify(&p); }
-
-int main() {
-  Base *base = generate();
-  identify(base);
-  identify(*base);
-  delete base;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
+    return 0;
 }
