@@ -40,7 +40,8 @@ std::ostream &char_conversion(std::ostream &os, std::optional<char> literal) {
 
 std::ostream &int_conversion(std::ostream &os, std::optional<int> literal) {
   os << "char: "
-     << (std::isprint(*literal) ? std::string(1, static_cast<char>(*literal))
+     << (*literal >= 32 && *literal <= 126 &&
+      std::isprint(*literal) ? std::string(1, static_cast<char>(*literal))
                                 : "impossible")
      << '\n';
   os << "int: " << *literal << '\n';
@@ -128,6 +129,7 @@ void ScalarConverter::convert(const std::string &literal) {
     }
   } catch (const std::out_of_range &e) {
     std::cout << "value out of range!" << '\n';
+    return ;
   }
 
   // convert to all other types.. what is wrong with this subject wth..
