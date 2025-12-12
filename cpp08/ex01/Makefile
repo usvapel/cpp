@@ -1,7 +1,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= iter
+NAME			:= span
 CXX				:= c++
 
 # Compiler flags
@@ -39,6 +39,7 @@ RESET			:= $(shell tput sgr0)
 # Parsing and syntax analysis
 SRCS_MAIN := \
 	main.cpp \
+	Span.cpp
 
 # Combine all source files
 SRCS := \
