@@ -20,4 +20,9 @@ public:
   void addNumber(unsigned int);
   int shortestSpan();
   int longestSpan();
+  template <typename I> void addRange(I begin, I end) {
+    for (I it = begin; it != end; ++it) {
+      addNumber(*it);
+    }
+  }
 };
