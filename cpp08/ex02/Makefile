@@ -1,7 +1,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= array
+NAME			:= mutant
 CXX				:= c++
 
 # Compiler flags
