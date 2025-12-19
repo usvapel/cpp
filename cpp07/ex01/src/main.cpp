@@ -1,26 +1,31 @@
 #include "Iter.hpp"
 
-int to_upper_wrapper(int c) {
-	return std::toupper(c);
+void test_int_array_increment() {
+  int numbers[] = {1, 2, 3, 4, 5};
+  size_t length = 5;
+
+  print_array("Before", numbers, length);
+  iter(numbers, length, [](int &n) { n += 10; });
+  print_array("After", numbers, length);
+  std::cout << std::endl;
 }
 
-int subtract(int v) {
-	return v - 1;
+void test_string_array_uppercase() {
+  std::string words[] = {"hello", "world", "test", "case"};
+  size_t length = 4;
+
+  print_array("Before", words, length);
+  iter(words, length, [](std::string &str) {
+    for (char &c : str) {
+      c = std::toupper(c);
+    }
+  });
+  print_array("After", words, length);
+  std::cout << std::endl;
 }
 
 int main() {
-	std::string array1 = "abcdef";
-	::print_array("std::string", &array1[0], 6);
-	::iter(&array1[0], array1.length(), to_upper_wrapper);
-	::print_array("std::string", &array1[0], 6);
-
-	char array2[] = "abcdef";
-	::print_array("char array", array2, 6);
-	::iter(array2, 6, to_upper_wrapper);
-	::print_array("char array", array2, 6);
-
-	int array3[3] = {1, 2, 3};
-	::print_array("int array", array3, 3);
-	::iter(array3, 3, subtract);
-	::print_array("int array", array3, 3);
+  test_int_array_increment();
+  test_string_array_uppercase();
+  return 0;
 }

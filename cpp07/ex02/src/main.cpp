@@ -13,7 +13,7 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
-	for (int i = 0; i < numbers.size(); i++) {
+	for (unsigned int i = 0; i < numbers.size(); i++) {
 		std::cout << numbers[i] << '\n';
 	}
     //SCOPE

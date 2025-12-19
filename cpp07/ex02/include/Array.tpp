@@ -8,7 +8,7 @@ template <typename T>
 Array<T>::Array(const Array &obj) : array_size(obj.array_size) {
   if (obj.elements) {
     elements = new T[array_size];
-    for (int i = 0; i < array_size; i++) {
+    for (unsigned int i = 0; i < array_size; i++) {
       elements[i] = obj.elements[i];
     }
   } else {
@@ -23,7 +23,7 @@ template <typename T> Array<T> &Array<T>::operator=(const Array &obj) {
     array_size = obj.array_size;
     if (obj.elements) {
       elements = new T[array_size];
-      for (int i = 0; i < array_size; i++) {
+      for (unsigned int i = 0; i < array_size; i++) {
         elements[i] = obj.elements[i];
       }
     } else {
@@ -33,10 +33,10 @@ template <typename T> Array<T> &Array<T>::operator=(const Array &obj) {
   return *this;
 }
 
-template <typename T> int Array<T>::size() { return array_size; }
+template <typename T> unsigned int Array<T>::size() { return array_size; }
 
-template <typename T> T &Array<T>::operator[](const int index) {
-  if (index < 0 || index > array_size - 1)
+template <typename T> T &Array<T>::operator[](const unsigned int index) {
+  if (index >= array_size)
     throw std::out_of_range("index out of bounds");
   return elements[index];
 }
