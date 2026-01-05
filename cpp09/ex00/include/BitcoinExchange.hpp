@@ -1,18 +1,26 @@
 #pragma once
 
+#include <chrono>
+#include <fstream>
 #include <iostream>
 #include <map>
+#include <regex>
+#include <sstream>
+#include <stdexcept>
+#include <string>
 
-class BitcoinExchange {
-private:
-  std::map<std::string, int> data;
+const std::regex csvregex("^[0-9]{4}"
+                          "-"
+                          "([0][1-9]|[1][0-2])"
+                          "-"
+                          "([0-2][0-9]|[3][0-1])"
+                          ","
+                          "[0-9]+.?[0-9]?+$");
 
-public:
-  BitcoinExchange() = default;
-  BitcoinExchange(const BitcoinExchange &) = default;
-  BitcoinExchange &operator=(const BitcoinExchange &) = default;
-  ~BitcoinExchange() = default;
-
-  std::map<std::string, int> &get_data() { return data; }
-  void create_map(std::string);
-};
+const std::regex inputfileregex("^[0-9]{4}"
+                                "-"
+                                "([0][1-9]|[1][0-2])"
+                                "-"
+                                "([0-2][0-9]|[3][0-1])"
+                                " \\| "
+                                "(([0-9]{1,3}(\\.[0-9]+)?|1000(\\.0+)?))$");

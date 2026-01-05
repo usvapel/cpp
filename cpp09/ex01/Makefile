@@ -1,7 +1,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= span
+NAME			:= rpn
 CXX				:= c++
 
 # Compiler flags
@@ -39,7 +39,7 @@ RESET			:= $(shell tput sgr0)
 # Parsing and syntax analysis
 SRCS_MAIN := \
 	main.cpp \
-	Span.cpp
+	RPN.cpp
 
 # Combine all source files
 SRCS := \
