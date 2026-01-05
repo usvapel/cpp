@@ -1,7 +1,7 @@
 #include "RPN.hpp"
 
-double calculate(std::string input, double val1, double val2) {
-  switch (input[0]) {
+double calculate(std::string op, double val1, double val2) {
+  switch (op[0]) {
   case '+':
     return val2 + val1;
   case '-':

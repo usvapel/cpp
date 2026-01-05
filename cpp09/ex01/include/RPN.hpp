@@ -9,4 +9,4 @@
 #include <stack>
 #include <stdexcept>
 
-const std::regex rgx("^([+-]?[0-9]?+|[-+/*]?)$");
+inline const std::regex rgx("^([+-]?[0-9]?+|[-+/*]?)$");
