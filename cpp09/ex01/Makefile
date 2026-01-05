@@ -1,7 +1,7 @@
 # ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ SETTINGS ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ #
 
 # Project configuration
-NAME			:= rpn
+NAME			:= RPN
 CXX				:= c++
 
 # Compiler flags
