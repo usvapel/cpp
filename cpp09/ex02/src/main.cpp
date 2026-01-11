@@ -58,7 +58,7 @@ int main(int ac, char **av) {
     SortBenchmark benchmark(deq, mergeInsertionSortDeque, 10000);
     auto avg_time = benchmark.run(deq);
     std::cout << "Time to process a range of [" << ac - 1
-              << "] elements with std::vector : " << avg_time << '\n';
+              << "] elements with std::deque  : " << avg_time << '\n';
   }
   return 0;
 }

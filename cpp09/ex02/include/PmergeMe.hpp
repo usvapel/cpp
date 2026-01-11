@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 
+// class for benchmarking the sorting
 template <typename Container, typename SortFunc> class SortBenchmark {
   const Container &original_;
   SortFunc sort_func_;
