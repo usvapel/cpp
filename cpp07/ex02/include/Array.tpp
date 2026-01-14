@@ -1,7 +1,7 @@
 template <typename T> Array<T>::Array() : elements(nullptr), array_size(0) {}
 
 template <typename T>
-Array<T>::Array(unsigned int n) : elements(new T[n]), array_size(n) {}
+Array<T>::Array(unsigned int n) : elements(new T[n]()), array_size(n) {}
 
 // copy
 template <typename T>

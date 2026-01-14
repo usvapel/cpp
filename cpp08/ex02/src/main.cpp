@@ -22,6 +22,14 @@ int main() {
       ++it;
     }
     std::stack<int> s(mstack);
+    std::cout << '\n';
+    const MutantStack<int> const_stack(mstack);
+    auto it1 = const_stack.begin();
+    auto it2 = const_stack.end();
+    while (it1 != it2) {
+      std::cout << "stack: [" << *it1 << "]" << std::endl;
+      ++it1;
+    }
   }
   std::cout << '\n';
   {
