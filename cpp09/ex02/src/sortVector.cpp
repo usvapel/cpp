@@ -1,4 +1,5 @@
 #include "PmergeMe.hpp"
+#include <map>
 
 // generate weird jacob insertion order
 std::vector<int> generateInsertionOrder(size_t pairCount) {
@@ -37,51 +38,69 @@ std::vector<int> generateInsertionOrder(size_t pairCount) {
   return order;
 }
 
-void mergeInsertionSortVector(std::vector<int> &vec) {
+std::vector<int> mergeInsertionSortVector(std::vector<int> &vec) {
+  if (vec.size() <= 1)
+    return vec;
 
   // create pairs with larger element first
   std::vector<std::pair<int, int>> pairs;
   for (size_t i = 0; i + 1 < vec.size(); i += 2) {
     int a = vec[i];
     int b = vec[i + 1];
-    if (a > b)
-      pairs.emplace_back(a, b);
-    else
-      pairs.emplace_back(b, a);
+    pairs.emplace_back(std::max(a, b), std::min(a, b));
   }
 
-  std::sort(pairs.begin(), pairs.end());
-
-  // vectors for big and small values each
-  std::vector<int> biggerValues;
-  std::vector<int> smallerValues;
-  for (const auto &p : pairs) {
-    biggerValues.push_back(p.first);
-    smallerValues.push_back(p.second);
+  // extract larger elements for recursion
+  std::vector<int> larger_elements;
+  for (auto &p : pairs) {
+    larger_elements.push_back(p.first);
   }
 
-  // generate Jacobsthal numbers
-  std::vector<int> insertOrder;
-  insertOrder = generateInsertionOrder(pairs.size());
+  // recursively sort
+  larger_elements = mergeInsertionSortVector(larger_elements);
 
-  // insert smaller values to the main chain with big values
-  for (size_t i : insertOrder) {
-    int value = smallerValues[i];
-    // binary search, returns iterator to first position where value can be
-    // inserted while keeping it sorted
-    auto start = biggerValues.begin();
-    auto end = biggerValues.end();
-    auto pos = std::lower_bound(start, end, value);
-    biggerValues.insert(pos, value);
+  // rebuild pairs in sorted order
+  // remember which smaller goes to which larger
+  std::map<int, int> larger_to_smaller;
+  for (auto &p : pairs) {
+    larger_to_smaller[p.first] = p.second;
+  }
+
+  std::vector<int> main_chain;
+  std::vector<int> pending;
+  for (int larger : larger_elements) {
+    main_chain.push_back(larger);
+    pending.push_back(larger_to_smaller[larger]);
+  }
+
+  // insert first pending element
+  if (!pending.empty()) {
+    main_chain.insert(main_chain.begin(), pending[0]);
+  }
+
+  // generate insertion order with Jacobsthal numbers
+  std::vector<int> insertOrder = generateInsertionOrder(pairs.size());
+
+  // insert smaller values to the main chain
+  for (size_t i = 1; i < insertOrder.size(); i++) {
+    size_t idx = insertOrder[i];
+    if (idx < pending.size()) {
+      int value = pending[idx];
+      auto start = main_chain.begin();
+      auto end = main_chain.end();
+      auto pos = std::lower_bound(start, end, value);
+      main_chain.insert(pos, value);
+    }
   }
 
   // check if theres an odd amount of values
   if (vec.size() % 2 != 0) {
-    auto start = biggerValues.begin();
-    auto end = biggerValues.end();
+    auto start = main_chain.begin();
+    auto end = main_chain.end();
     auto pos = std::lower_bound(start, end, vec.back());
-    biggerValues.insert(pos, vec.back());
+    main_chain.insert(pos, vec.back());
   }
 
-  vec = biggerValues;
+  vec = main_chain;
+  return main_chain;
 }

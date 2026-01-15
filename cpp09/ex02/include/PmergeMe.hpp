@@ -31,5 +31,5 @@ public:
   }
 };
 
-void mergeInsertionSortVector(std::vector<int> &vec);
+std::vector<int> mergeInsertionSortVector(std::vector<int> &vec);
 void mergeInsertionSortDeque(std::deque<int> &deq);

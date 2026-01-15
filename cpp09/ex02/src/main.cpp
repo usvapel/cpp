@@ -40,7 +40,7 @@ int main(int ac, char **av) {
   std::cout << '\n';
 
   {
-    SortBenchmark benchmark(vec, mergeInsertionSortVector, 10000);
+    SortBenchmark benchmark(vec, mergeInsertionSortVector, 1);
     auto avg_time = benchmark.run(vec);
 
     std::cout << "after:   ";
@@ -54,11 +54,12 @@ int main(int ac, char **av) {
     std::cout << "Time to process a range of [" << ac - 1
               << "] elements with std::vector : " << avg_time << '\n';
   }
-  {
-    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 10000);
-    auto avg_time = benchmark.run(deq);
-    std::cout << "Time to process a range of [" << ac - 1
-              << "] elements with std::deque  : " << avg_time << '\n';
-  }
+  // {
+  //   SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1);
+  //   auto avg_time = benchmark.run(deq);
+  //   // get operations
+  //   std::cout << "Time to process a range of [" << ac - 1
+  //             << "] elements with std::deque  : " << avg_time << '\n';
+  // }
   return 0;
 }
