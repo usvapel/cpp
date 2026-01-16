@@ -22,22 +22,53 @@ public:
       : original_(data), sort_func_(func), iterations_(iterations),
         comparisons_(0) {}
 
-  auto run(Container &output) {
+  void is_sorted(const Container &c) {
+    if (std::ranges::is_sorted(c))
+      std::cout << "sorted!" << '\n';
+  }
+
+  auto run() {
+    const size_t max_display = 10;
+
+    std::cout << "before:  ";
+    for (size_t i = 0; i < original_.size() && i < max_display; i++) {
+      std::cout << original_[i] << ' ';
+    }
+    if (original_.size() > max_display)
+      std::cout << "[...]";
+    std::cout << '\n';
+
     auto start = std::chrono::steady_clock::now();
 
+    Container output = original_;
     for (int i = 0; i < iterations_; ++i) {
       comparison_count = 0;
       output = original_;
-      sort_func_(output);
+      output = sort_func_(output);
       comparisons_ += comparison_count;
     }
 
     auto finish = std::chrono::steady_clock::now();
+
+    std::cout << "after:   ";
+    for (size_t i = 0; i < output.size() && i < max_display; i++) {
+      std::cout << output[i] << ' ';
+    }
+
+    if (output.size() > max_display)
+      std::cout << "[...]";
+    std::cout << '\n';
+
+    auto avg_time =
+        std::chrono::duration<double, std::micro>(finish - start) / iterations_;
+
     comparisons_ = comparisons_ / iterations_;
-    return std::chrono::duration<double, std::micro>(finish - start) /
-           iterations_;
+    std::cout << "operations: " << comparisons_ << '\n';
+    std::cout << "Time to process a range of [" << output.size()
+              << "] elements with std::vector : " << avg_time << '\n';
+
+    is_sorted(output);
   }
-  size_t get_comparisons() { return comparisons_; }
 };
 
 std::vector<int> mergeInsertionSortVector(std::vector<int> &vec);

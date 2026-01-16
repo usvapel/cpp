@@ -26,8 +26,7 @@ void testScaling() {
   }
 }
 
-template <typename Container = std::vector<int>>
-Container validate_input(char **input) {
+template <typename Container> Container validate_input(char **input) {
   Container c;
   while (*input) {
     int index = 0;
@@ -51,44 +50,15 @@ int main(int ac, char **av) {
     std::cout << "Error" << '\n';
     return 0;
   }
-
-  auto vec = validate_input(av + 1);
-  auto deq = validate_input<std::deque<int>>(av + 1);
-
-  const size_t max_display = 10;
-
-  std::cout << "before:  ";
-  for (size_t i = 0; i < vec.size() && i < max_display; i++) {
-    std::cout << vec[i] << ' ';
-  }
-  if (vec.size() > max_display)
-    std::cout << "[...]";
-  std::cout << '\n';
-
   {
-    SortBenchmark benchmark(vec, mergeInsertionSortVector, 10000);
-    auto avg_time = benchmark.run(vec);
-    auto comparisons = benchmark.get_comparisons();
-
-    std::cout << "after:   ";
-    for (size_t i = 0; i < vec.size() && i < max_display; i++) {
-      std::cout << vec[i] << ' ';
-    }
-    if (vec.size() > max_display)
-      std::cout << "[...]";
-    std::cout << '\n';
-
-    std::cout << "operations: " << comparisons << '\n';
-    std::cout << "Time to process a range of [" << ac - 1
-              << "] elements with std::vector : " << avg_time << '\n';
+    std::vector<int> vec = validate_input<std::vector<int>>(av + 1);
+    SortBenchmark benchmark(vec, mergeInsertionSortVector, 1);
+    benchmark.run();
   }
   {
-    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 10000);
-    auto avg_time = benchmark.run(deq);
-    auto comparisons = benchmark.get_comparisons();
-    std::cout << "operations: " << comparisons << '\n';
-    std::cout << "Time to process a range of [" << ac - 1
-              << "] elements with std::deque  : " << avg_time << '\n';
+    std::deque<int> deq = validate_input<std::deque<int>>(av + 1);
+    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1);
+    benchmark.run();
   }
   {
     std::cout << '\n';
