@@ -1,4 +1,7 @@
 #include "PmergeMe.hpp"
+#include <cstddef>
+#include <optional>
+#include <stdexcept>
 
 size_t comparison_count = 0;
 
@@ -33,12 +36,10 @@ template <typename Container> Container validate_input(char **input) {
     try {
       index = std::stoi(*input++);
     } catch (std::exception &) {
-      std::cout << "Error: invalid value" << '\n';
-      exit(1);
+      throw std::invalid_argument("Error: invalid value");
     }
     if (index < 0) {
-      std::cout << "Error: value is negative" << '\n';
-      exit(1);
+      throw std::invalid_argument("Error: negative value");
     }
     c.push_back(index);
   }
@@ -51,18 +52,26 @@ int main(int ac, char **av) {
     return 0;
   }
   {
-    std::vector<int> vec = validate_input<std::vector<int>>(av + 1);
-    SortBenchmark benchmark(vec, mergeInsertionSortVector, 1000);
-    benchmark.run();
+    try {
+      std::vector<int> vec = validate_input<std::vector<int>>(av + 1);
+      SortBenchmark benchmark(vec, mergeInsertionSortVector, 1000);
+      benchmark.run();
+    } catch (const std::invalid_argument &e) {
+      std::cout << e.what() << '\n';
+      return 0;
+    }
   }
   {
-    std::deque<int> deq = validate_input<std::deque<int>>(av + 1);
-    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1000);
-    benchmark.run();
+    try {
+      std::deque<int> deq = validate_input<std::deque<int>>(av + 1);
+      SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1000);
+      benchmark.run();
+    } catch (const std::invalid_argument &e) {
+      std::cout << e.what() << '\n';
+      return 0;
+    }
   }
-  {
-    std::cout << '\n';
-    testScaling();
-  }
+  std::cout << '\n';
+  testScaling();
   return 0;
 }
