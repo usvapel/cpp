@@ -1,11 +1,11 @@
 #include "PmergeMe.hpp"
 
-bool counted_less(int a, int b) {
+static bool counted_less(int a, int b) {
   comparison_count++;
   return a < b;
 }
 
-std::vector<int> generateInsertionOrder(size_t pairCount) {
+static std::vector<int> generateInsertionOrder(size_t pairCount) {
   if (pairCount == 0)
     return {};
 

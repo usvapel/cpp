@@ -10,7 +10,7 @@
 #include <vector>
 
 extern size_t comparison_count;
-// class for benchmarking the sorting
+
 template <typename Container, typename SortFunc> class SortBenchmark {
   const Container &original_;
   SortFunc sort_func_;
@@ -18,6 +18,7 @@ template <typename Container, typename SortFunc> class SortBenchmark {
   size_t comparisons_;
 
 public:
+  const size_t max_display = 10;
   SortBenchmark(const Container &data, SortFunc func, int iterations = 10000)
       : original_(data), sort_func_(func), iterations_(iterations),
         comparisons_(0) {}
@@ -27,16 +28,19 @@ public:
       std::cout << "sorted!" << '\n';
   }
 
-  auto run() {
-    const size_t max_display = 10;
-
-    std::cout << "before:  ";
-    for (size_t i = 0; i < original_.size() && i < max_display; i++) {
-      std::cout << original_[i] << ' ';
+  void print_container(std::string text, const Container &c) {
+    std::cout << text;
+    for (size_t i = 0; i < c.size() && i < max_display; i++) {
+      std::cout << c[i] << ' ';
     }
-    if (original_.size() > max_display)
+    if (c.size() > max_display)
       std::cout << "[...]";
     std::cout << '\n';
+  }
+
+  auto run() {
+
+    print_container("before:  ", original_);
 
     auto start = std::chrono::steady_clock::now();
 
@@ -50,20 +54,12 @@ public:
 
     auto finish = std::chrono::steady_clock::now();
 
-    std::cout << "after:   ";
-    for (size_t i = 0; i < output.size() && i < max_display; i++) {
-      std::cout << output[i] << ' ';
-    }
-
-    if (output.size() > max_display)
-      std::cout << "[...]";
-    std::cout << '\n';
+    print_container("after:   ", output);
 
     auto avg_time =
         std::chrono::duration<double, std::micro>(finish - start) / iterations_;
 
-    comparisons_ = comparisons_ / iterations_;
-    std::cout << "operations: " << comparisons_ << '\n';
+    std::cout << "operations: " << (comparisons_ / iterations_) << '\n';
     std::cout << "Time to process a range of [" << output.size()
               << "] elements with std::vector : " << avg_time << '\n';
 

@@ -10,22 +10,17 @@ static std::deque<int> generateInsertionOrder(size_t pairCount) {
     return {};
 
   // Generate jacobshtal numbers
-  std::deque<size_t> jacob;
-  jacob.push_back(0);
-  jacob.push_back(1);
+  std::deque<size_t> jacob{0, 1};
   while (jacob.back() < pairCount) {
     size_t n = jacob.size();
     jacob.push_back(jacob[n - 1] + 2 * jacob[n - 2]);
   }
 
-  std::deque<int> order;
-
   // generate order, skip 0, 1
-  for (size_t i = 2; i < jacob.size() && jacob[i - 1] < pairCount; i++) {
+  std::deque<int> order;
+  for (size_t i = 2; i < jacob.size(); i++) {
     size_t current = std::min(jacob[i], pairCount);
-    size_t prev = jacob[i - 1];
-
-    for (size_t j = current; j > prev; j--) {
+    for (size_t j = current; j > jacob[i - 1]; j--) {
       order.push_back(j - 1);
     }
   }
@@ -64,39 +59,39 @@ std::deque<int> mergeInsertionSortDeque(std::deque<int> &vec) {
   }
 
   // build main chain and pending list
-  std::deque<int> main_chain;
-  std::deque<int> pending;
+  std::deque<int> main;
+  std::deque<int> pend;
 
   for (int larger : larger_elements) {
-    main_chain.push_back(larger);
-    pending.push_back(larger_to_smaller[larger]);
+    main.push_back(larger);
+    pend.push_back(larger_to_smaller[larger]);
   }
 
-  // insert first pending Rlement
-  if (!pending.empty()) {
-    main_chain.insert(main_chain.begin(), pending[0]);
+  // insert first pending element, always smallest
+  if (!pend.empty()) {
+    main.insert(main.begin(), pend[0]);
   }
 
   // generate insertion order with Jacobsthal numbers
   std::deque<int> insertOrder = generateInsertionOrder(pairCount);
 
   // insert smaller values to the main chain
-  for (int idx : insertOrder) {
-    if (idx < (int)pending.size()) {
-      int value = pending[idx];
-      auto pos = std::lower_bound(main_chain.begin(), main_chain.end(), value,
-                                  counted_less);
-      main_chain.insert(pos, value);
+  for (int i : insertOrder) {
+    if (i < static_cast<int>(pend.size())) {
+      int value = pend[i];
+      auto pos =
+          std::lower_bound(main.begin(), main.end(), value, counted_less);
+      main.insert(pos, value);
     }
   }
 
-  // check if theres an odd amount of values
+  // handle straggler
   if (vec.size() % 2 != 0) {
-    auto pos = std::lower_bound(main_chain.begin(), main_chain.end(),
-                                vec.back(), counted_less);
-    main_chain.insert(pos, vec.back());
+    auto pos =
+        std::lower_bound(main.begin(), main.end(), vec.back(), counted_less);
+    main.insert(pos, vec.back());
   }
 
-  vec = main_chain;
-  return main_chain;
+  vec = main;
+  return main;
 }

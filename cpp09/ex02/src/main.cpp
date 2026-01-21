@@ -52,12 +52,12 @@ int main(int ac, char **av) {
   }
   {
     std::vector<int> vec = validate_input<std::vector<int>>(av + 1);
-    SortBenchmark benchmark(vec, mergeInsertionSortVector, 1);
+    SortBenchmark benchmark(vec, mergeInsertionSortVector, 1000);
     benchmark.run();
   }
   {
     std::deque<int> deq = validate_input<std::deque<int>>(av + 1);
-    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1);
+    SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1000);
     benchmark.run();
   }
   {
