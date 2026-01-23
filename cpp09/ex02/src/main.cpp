@@ -38,7 +38,7 @@ template <typename Container> Container validate_input(char **input) {
     } catch (std::exception &) {
       throw std::invalid_argument("Error: invalid value");
     }
-    if (index < 0) {
+    if (index < 0)
       throw std::invalid_argument("Error: negative value");
     }
     c.push_back(index);
