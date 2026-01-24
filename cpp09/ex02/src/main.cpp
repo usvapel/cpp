@@ -40,7 +40,6 @@ template <typename Container> Container validate_input(char **input) {
     }
     if (index < 0)
       throw std::invalid_argument("Error: negative value");
-    }
     c.push_back(index);
   }
   return c;
