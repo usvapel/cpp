@@ -3,6 +3,7 @@
 #include <optional>
 #include <stdexcept>
 
+#define ITERATIONS 1
 size_t comparison_count = 0;
 
 void testScaling() {
@@ -53,7 +54,7 @@ int main(int ac, char **av) {
   {
     try {
       std::vector<int> vec = validate_input<std::vector<int>>(av + 1);
-      SortBenchmark benchmark(vec, mergeInsertionSortVector, 1000);
+      SortBenchmark benchmark(vec, mergeInsertionSortVector, ITERATIONS);
       benchmark.run();
     } catch (const std::invalid_argument &e) {
       std::cout << e.what() << '\n';
@@ -63,7 +64,7 @@ int main(int ac, char **av) {
   {
     try {
       std::deque<int> deq = validate_input<std::deque<int>>(av + 1);
-      SortBenchmark benchmark(deq, mergeInsertionSortDeque, 1000);
+      SortBenchmark benchmark(deq, mergeInsertionSortDeque, ITERATIONS);
       benchmark.run();
     } catch (const std::invalid_argument &e) {
       std::cout << e.what() << '\n';
