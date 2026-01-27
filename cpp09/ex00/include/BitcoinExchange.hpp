@@ -1,15 +1,15 @@
 #pragma once
 
 #include <chrono>
-#include <iomanip>
 #include <fstream>
+#include <iomanip>
 #include <iostream>
 #include <map>
+#include <optional>
 #include <regex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
-#include <optional>
 
 const std::regex csvregex("^[0-9]{4}"
                           "-"
