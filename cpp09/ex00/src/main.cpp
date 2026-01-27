@@ -1,13 +1,28 @@
 #include "BitcoinExchange.hpp"
 
+// std::optional<std::string> validate_date(std::string &line) {
+//   std::istringstream ss{line};
+//   std::chrono::year_month_day ymd;
+//   ss >> std::chrono::parse("%Y-%m-%d", ymd);
+//   if (ss.fail())
+//     return std::nullopt;
+//   else
+//     return line.substr(0, line.find('|') - 1);
+// }
+
 std::optional<std::string> validate_date(std::string &line) {
-  std::istringstream ss{line};
-  std::chrono::year_month_day ymd;
-  ss >> std::chrono::parse("%Y-%m-%d", ymd);
-  if (ss.fail())
-    return std::nullopt;
-  else
-    return line.substr(0, line.find('|') - 1);
+    std::istringstream ss{line};
+    std::tm t{};
+    ss >> std::get_time(&t, "%Y-%m-%d");
+    if (ss.fail())
+        return std::nullopt;
+
+    std::tm tmp = t;
+    tmp.tm_isdst = -1;
+    std::mktime(&tmp);
+    if (tmp.tm_year != t.tm_year || tmp.tm_mon != t.tm_mon || tmp.tm_mday != t.tm_mday)
+        return std::nullopt;
+    return line.substr(0, line.find('|'));
 }
 
 void validate_inputfile(std::string inputfile,
