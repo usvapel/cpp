@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <optional>
 #include <stdexcept>
+#include <iomanip>
 
 #define ITERATIONS 1
 size_t comparison_count = 0;
